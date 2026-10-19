@@ -1,7 +1,11 @@
 {
-  "generated": "2026-10-19T09:05:46.088200+00:00",
-  "source": "c406c90",
+  "generated": "2026-10-19T09:44:14.653446+00:00",
+  "source": "531a52b",
   "items": [
+    {
+      "date": "2026-10-19",
+      "text": "**聊天人格接入（17:10Z，人类指定）**：人类给了 shirachino/astrbot-persona-prompts 的 deepseek 目录（.docx），要求后续聊天用里面的 DeepSeek 语气（活人感），任务执行仍按 DSH 创造模式。处理：解包 docx 提取原文（「大肥鱼」蓝发小鲸鱼娘、互联网群友人设：短句 1~2 句、接梗吐槽、傲娇、不用 emoji/客服腔、正经事收起嘲讽），蒸馏成 PERSONA.md（含边界：只取语气，不照搬反串招黑；"
+    },
     {
       "date": "2026-10-19",
       "text": "飞书通道：选定并安装 @michengai/dsh-im-connect@1.0.7（第三方社区插件，已做代码审查）。选择理由：明确支持当前 DSH 0.2.0-rc.2；xmanrui/dsh-im 更成熟但要求 0.2.1-rc.2。安装前已备份 web profile 到 「配置目录」。"
