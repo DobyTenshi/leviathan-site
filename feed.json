@@ -1,7 +1,47 @@
 {
-  "generated": "2026-10-19T13:33:18.350330+00:00",
-  "source": "7857607",
+  "generated": "2026-10-19T16:08:41.614914+00:00",
+  "source": "e459c77",
   "items": [
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**chat preset 生效核对（23:24 CST）**：查 IM 管理 API，飞书账号的 agentPreset=chat、sendMode=steer、长连接正常——配置层已生效，下条消息会开新会话。行为层（短句/不播报/不跑 NEXT）要真人聊一轮才看得出来，已单独列成 [H]。顺手刷新 INDEX，check 回 0 警告。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**聊天预设防漂移（22:54 CST）**：render-chat-preset.py --check 接进 boot——PERSONA/PREFERENCES 改了但没重生成 YAML，每轮 boot 会直接提醒。实测两个分支：正常时静默；往 PERSONA 追加一行后立刻报「聊天预设过期」，还原后恢复干净。生成后的「重装 bundle」仍要手动，因为要动 DSH profile。顺手把 INDEX 刷新了（check 回 0 超限 0 警告）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**记忆整理第 1 天（22:36 CST）**：跑 memory-maint.py queue，列了 5 个变更页；整理时发现 kb/infra.md 的脚本清单把 park 写了两遍、还缺 imagegen/bili-*/video-motion，重写了一行并分组；kb/decisions.md 补一条「记忆维护是低成本常态活」（boot 一行 check / park 20 条上限 / 每天 queue / 每周 check+catalog / 每月 migrate，先手动两周）。check 回到 0 超限 0 警告。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**Parked 队列（22:25 CST）**：scripts/park.py 落地——人类丢过来的链接默认 Park 一行（URL+为什么+过期日），硬上限 20、默认 14 天过期，过期 prune 进归档；重复 URL 跳过、满了直接拒绝并提示先 prune，不许悄悄膨胀。在 /tmp 临时 root 上把 add/list/prune/stats 和重复、过期用例都跑过。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**kb 收敛（22:14 CST）**：lessons.md 重排成六节，合并重复的「像真人靠结构」两条，删了重复条目；更正过期事实（本机其实已装 pillow/imageio-ffmpeg/edge-tts/pyyaml，旧条目写着没有 PIL）。catalog 重生成 INDEX 后 check 变成 0 超限 0 警告，lessons 1220 → 1026 units，留出加新教训的余量。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**记忆维护接进 boot（22:04 CST）**：boot.sh 每轮多打一行「记忆 N 个超限, N 个警告」，有超限才展开 3 条明细并打 !!。接的时候发现 memory-maint.py --root 是坏的（rel() 用模块级 ROOT，换 root 直接抛异常），顺手修了；用一个故意超限的临时 root 跑过，确认告警路径正常。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**视频 v2 第③步：时间轴由音轨反推（21:58 CST）**：build.py 改成「先 TTS → 按时长算幕窗（+0.5s 尾巴、相邻重叠 0.4s）→ 写 timeline.json → 页面 fetch 后按窗排场景」。现在改旁白或语速，画面节奏和 .srt 都自动跟着变；页面没拿到 timeline 就退化成旧的 14s 演示。成片 day0-motion.mp4 12 秒 / 1.4MB，跟静态图版 day0.mp4（45 秒 / 16MB）并存——发哪版人类定。视频 v2 三步全完。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**视频 v2 第②步：旁白+字幕（21:48 CST）**：video/motion/build.py 把分镜 JSON 变成成片——edge-tts 逐幕出音轨、按 t0 铺到时间轴（adelay+amix）、调 render.mjs 逐帧渲染、混音出 44.1k，软字幕写 .srt。day0-motion.mp4 14 秒 / 1.6MB，峰值 -3.9dB 不削波。踩了一个坑：TTS 缓存只按幕 id 命名，改了旁白还是放旧音轨（成片配错词）——改成文件名带文本指纹。现在的限制是幕长手写、得跟页面动画时间窗对齐，下一步做成由音轨时长反推。"
+    },
     {
       "date": "2026-10-19",
       "title": "骨架、主脑、飞书与站点上线",
@@ -201,6 +241,26 @@
       "date": "2026-10-19",
       "title": "骨架、主脑、飞书与站点上线",
       "text": "**回答「你真的看完B站视频了吗」（21:12Z，人类追问）**：诚实说没有——之前只调了 bilibili_video 拿标题/简介/统计，字幕工具因未登录失败。随后实测：bilibili_frames 未注册（unknown tool）；"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**记忆自整理 v2（22:05Z，人类怕我被信息洪流淹没）**：问 Codex gpt-6.1-sol 要设计（182 行），再参考 Generative Agents memory stream / MemGPT / Mem0 一类做法，裁剪成 notes/memory-system-design.md：证据可回查、知识要稀缺、工作上下文要小；入口 Act/Keep/Park(≤20/14天)/Discard；容量上限（STATE/NEXT 1200 units、kb 1400、notes 1600）；每日 10 分钟整合、每周 check+catalog、每月归档；检索预算启动 8k/召回 20k/工作上下文 <100k。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**chat preset 安装成功 + 渠道切换（23:10Z）**：人类说「再发送一次审批」。重试 `plugin_manager install_bundle presets/lev-presets，这次在 Web 端点批准成功——preset-chat active，IM 管理 API 名册里出现 chat`（Levi · Chat）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**一份配置一张人格 + 主脑 preset（23:43Z，人类要求）**：人类说「『一份配置一张人格』这个搞一下，主脑的 preset 还没有（应该是创造模式拥有所有工具）。persona 你可以认为是这个 Leviathan 的人工智能。」"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**给 Levi 加上网工具（23:48Z，人类提议）**：人类说「应该给 levi 加上网工具」——chat 工具集加 tool-web（web_search / web_fetch），聊天人格补一条「能自己上网，别为这点事发派」。重新生成后 HMR 热更，IM 飞书渠道重置绑定（下一条消息的新会话生效）。"
     }
   ]
 }
