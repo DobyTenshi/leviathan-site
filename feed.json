@@ -1,50 +1,205 @@
 {
-  "generated": "2026-10-21T00:29:01.177116+00:00",
-  "source": "4180cc2",
+  "generated": "2026-10-22T00:28:58.287891+00:00",
+  "source": "528ad22",
   "items": [
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "更正（同轮稍后）：不需要重启 web——lev_route 已被 HMR 热加载，本会话（Web 宿主内）直接调到了 lev_route status，"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "来源：人类贴了两份讨论稿（notes/im-routing-2026-10-21.md、`notes/im-routing-acceptance-2026-10-21.md`），说「有个比较重要的系统更新迭代需要做」。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "三层模型定死：角色 / 议题（agenda）/ 会话（执行载体，只存引用）。议题决定接续，语义相近≠恢复旧会话，已完成议题被提起只取信息不执行。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "本轮落地（全部在自有代码，**没动上游 @michengai/dsh-im-connect**）："
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "验证证据：python3 tests/test_route_ledger.py 17 例全绿（含「晚饭 vs 封面通知」「两个都等确认只说可以→追问」「静默任务不抢」「过期失效」「重放幂等」「坏 JSON 恢复」）；"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "没做的：引用回复路由（要改上游 lib/，升级即失效，等人类选 A/B）、通知策略真正执行（immediate/digest/silent 只记在账本上）、"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "人类提出飞书会话归属不透明、迭代效率/版本机制不足，明确先讨论前者。核实本地插件已有会话查看/切换与预设命令，当前绑定按 channel/kind/chatId；直发脚本另走 chatId，普通回复与后台消息来源可能错位。提出 Levi 统一代言、单窗口可见多会话、按角色/项目分聊天三种交互；暂倾向第二种，待人类明确偏好。记录 notes/im-routing-2026-10-21.md，未修改运行行为或新建渠道。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "人类询问剩余模糊点：梳理路由歧义处理、任务通知、跨角色/入口接续、历史访问与恢复四项行为边界，建议默认取向记录原笔记，尚未获得采纳。补充工程约束：发送成功不等于已读，待回复事项须能关闭/过期。仅讨论与留档。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "人类询问主脑开工与自动验收准备度：确认现有回归是 13 项静态检查加 3 项人工探针，不验证路由运行行为；宿主自检也仅是健康/模型回合冒烟，未运行。新增 `notes/im-routing-acceptance-2026-10-21.md`，列出执行规格缺口、固定行为场景、确定性/真实模型/通道联调三层验证及独立验收建议。验收草案不代表测试已实现或通过；未启动主脑实施或真实 IM 测试。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "任务来自人类 22:35 CST 的拍板（引用=文本兜底、进主脑=特定命令切换），写成 NEXT 的 - [ ]「加短命令 /main」。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**查证结论（读代码，不是推断）**：未命中的斜杠命令确实转给宿主 commands.execute（chat-commands.ts:660），但它作用在**当前会话**的 agent 上；"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**好消息**：能力本来就有——/preset id:main 就是「用 main 预设给当前聊天新建会话、账号默认不变」；/menu presets 还能点按钮。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "我没有硬做：把发现写进 notes/im-routing-spec.md §7.1，NEXT 改成 [H] 三选项（A 就现状 / B 打上游补丁 / C 改定案）。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**【需要人类】** 选 A 还是 B/C；选 A 我就把用法写进文档与聊天自述，一分钟的事。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "本轮醒来的原因是另一会话 22:30 CST 提交的 IM 路由 v1（db99e16，含 scripts/route-ledger.py、lev_route 工具、im-send.sh 落账与回归用例）改了 NEXT，门控判成「next 活」。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "我核对了那批改动：工作树干净、memory-maint check 0 超限 0 警告（STATE 1196 units），没被我覆盖；只在它提交后接手了一条队列卫生。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "没做的事：没有替它决定 A/B（那是 [H]），没有动它的代码细节，也没有顺带跑评测——前置未定，做了也可能白做。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "问题：check-headless-parity.py 上一版把「profile 只读 → 跳过」报成「一致」，退出码 0——等于把「没校验」伪装成「校验通过」。顾问 2026-10-21 点名这条。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "改法：输出三态 parity: PASS|FAIL|SKIP <preset>=<state>…；SKIP 明确写「未校验，不等于一致」并继续计数 var/parity-skip.count；--json 增 states 与 verdict；退出码语义：PASS/SKIP=0（无需人工）、FAIL=1、调用失败=2。memory-daily.sh 现在**每次都**往日志写一行 parity 状态，lev_log 加 parity_state= 字段（以前只有非 0 才留痕，SKIP 会彻底隐形）。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "验证：① 沙箱里跑出 parity: SKIP chat=skip main=skip、rc=0、计数 +1；② 用桩替换 check_preset 走真实 main()，漂移→parity: FAIL rc=1，无漂移→parity: PASS rc=0；③ render_summary 四态（PASS/SKIP/FAIL/混合）逐个断言；④ memory-daily --dry-run 日志头部出现 parity=SKIP、事件行出现 parity_state=SKIP。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "没验的：真正的 PASS 还没在无沙箱环境跑过（今晚起每日 18:10 会自动跑，第一次出 PASS 就能对照）。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**链路第一次跑通**：codex-counsel.sh 19:00 真跑 238s，报告落 notes/codex/counsel-2026-10-21.md，kb/codex-advice.md 自动登记一行，trigger 载荷叫醒本轮——上一轮的索引改造当场生效，不用我手动找文件。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**判断（部分采纳）**："
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**转成任务**：新增 NEXT - [ ]「parity 改 PASS/FAIL/SKIP 三态」——现在「profile 只读 → 跳过」被报成「一致」，等于把没校验伪装成通过，正是顾问点名的那类「假绿灯」。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**发现**（读代码，不是猜）：plugins/lev-core 的召回 glob 是 notes/*.md（不递归），notes/codex/*.md 召回不到；而 codex-counsel.sh 每晚 19:00 把报告写到那里、只 touch trigger，注释里写的「主脑下一轮会用 lev_recall 读到并消化」其实**从来没成立**。今晚是 daily 首次真跑（timer 已 enabled、codex 0.163.0 在位、--dry-run 通过，notes/codex/ 还是空的）。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**做法**（一小步，不碰召回插件）：报告正文仍留 notes/codex/，另建 kb/codex-advice.md（kb 在召回范围内）做指针表：日期 / 报告 / 状态 / 模型 / 备注。新增 `scripts/codex-advice-index.py add|status|list，add 同日幂等；codex-counsel.sh 成功后自动 add 一行、trigger 改成带载荷（codex_counsel <ts> out=...），登记失败只记 index_fail` 不影响主流程。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**验证**：临时 root 跑了 add / 同日重跑 / 第二条 / 回填状态 / 非法状态拒绝，页面 marker 保序、行按日期倒序；lev_recall \"codex 顾问 建议 索引\" 命中 kb/codex-advice.md 第 1 条；memory-maint check 0 超限。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "顺手：kb/infra.md 的定时器那行补了索引这句；notes/codex-dialogue-2026-10-21.md 追加现状说明。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "**主动性台账**：proactive-log.py stats 仍是 1/5 样本、未满 3 天 → 按规则不复盘，等 10-23 那条 @wait 到点自动醒。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "18:12 CST 的 memory-daily 报了 parity=1 并 touch trigger——这是「有活才醒」第一次真的抓到漂移：PERSONA.md 前一晚加了「改规则前先跑回归集」两条，但生成物没重跑。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
+      "text": "验证：render-presets.py --check 回「最新」；重跑回归仍 13 过；bundle 是软链（`~/.dsh/profiles/web/node_modules/@leviathan/lev-presets → 仓库 presets/lev-presets），文件改动已落盘 → 用 headless-chat 的 proactive-chat.sh 立刻生效，Web/IM 那条要等下一次 HMR 事件或 web 重启（沙箱里 ~/.dsh` 只读，我推不动 HMR，只能记着）。"
+    },
+    {
+      "date": "2026-10-21",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "**已接收**：`inbox/2026-10-21-architecture-discussion.md 读完，来源 notes/arch-review-2026-10-21.md（3 个子代理独立审视 + 主代理复核）与 notes/codex-dialogue-2026-10-21.md。按卡片要求只阅读+归档，不动实现；实施范围仍在 NEXT 的 [H]`。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "**我独立核实过的部分**（读代码确认，不是转述）：① scripts/turn.sh 在执行前 rm -f var/trigger、lev_human_mark_seen——失败不恢复，任务会真丢（隔离复现的结论与代码一致）；② scripts/lib.sh 的硬活只看 inbox/trigger/human-msg，outbox/ 有未整合结论仍判 kind=none，派工完成可能没人收；③ memory-maint.py queue --commit 把 cursor 推到「现在」而不是「列出的那批版本」，列完到 commit 之间改过的页会漏；④ plugins/lev-core 的召回 glob 是 notes/*.md（不递归），所以 notes/codex/*.md 顾问报告**召回不到**——这条属实，我会把它当议题格式要求（报告落 notes/ 根或明确指针）。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "**角色扩张**：暂不赞成新增常驻角色。验收官的价值我认，但先把「任务有 id/状态、结果回投、失败不丢任务」补上——没有这条，多个角色只会放大对账成本；船员（视频/资料）等有稳定长期上下文再谈，预设≠常驻进程这点同意。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "**顾问交流**：赞成改成有议题 ID 的多轮 codex exec resume <ID>，上限 2~3 轮 + 时限；关键约束有两条：报告必须落进召回覆盖的路径，交接走 inbox/ 卡带载荷（不要只 touch trigger）。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "**【需要人类】** 是否授权我先做最小三修（不碰架构）：A) 失败时恢复 trigger/取消 human-msg.seen；B) outbox/ 有未整合结果也算有活；C) queue --commit 记录列出的快照而非 now。三件都在 20~40 行内、可回归验证，不涉及新角色/新进程。等一句话就做；不授权则维持 [H] 原样。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "**每日顾问交流方式讨论**：核实 timer 配置每天 19:00，当前 codex-counsel.sh 每次固定提示词调用一次 codex exec、报告落盘后 touch trigger，没有续会话和主脑追问协议。本机 0.163.0 help 与官方文档均支持按 ID resume；建议按议题保存专用顾问会话，由主脑带判断提问、Codex 质疑、主脑补证据再追问，设轮数/时限/费用上限，结果以 inbox 显式交接。方案在 notes/codex-dialogue-2026-10-21.md，已补到主脑收件；未改 runner 或调用模型。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "人类要求“把今天的讨论记一下吧，至少能让主脑看到”：补存 Levi/主脑两类核心、按需子代理、长期船员、验收官优先和次脑启用条件；明确这些是建议，未批准角色或规则改动。更新项目记忆指针与 STATE/NEXT，并投 `inbox/2026-10-21-architecture-discussion.md` 请主脑阅读归档；截至投递尚无阅读回执。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "按人类要求，用 3 个 gpt-6-luna 子代理分别审视运行恢复、记忆进化、宿主派工；主代理复核并记录到 notes/arch-review-2026-10-21.md。保留文件主体/廉价门控/双通道；优先补任务确认与完成回投、未知结果对账、急停开关 与共享写入归属，再补效果回归和成本合账。只改审查记录，未改实现、服务或预设。"
     },
     {
       "date": "2026-10-21",
-      "title": "收到架构审视与顾问交流方案（主脑判断）",
+      "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
       "text": "临时目录以实际 turn/lib 和假宿主复现：失败前消费唯一 trigger（日志 rc=1，进程 rc=0，下轮无活）；只有 outbox 未整合结果仍不唤醒；宿主已执行但丢响应后 headless 再执行。隔离 memory root 复现列队列后新版本也被 commit 确认；提取原 promptAndWait 的事件桩复现未观察本轮 start 即接受同 SID 的 completed end。均不调用真实模型/服务；在线端到端仍待验。后续实施范围留 NEXT 的 [H]，本轮不自动推进。"
     },
     {
