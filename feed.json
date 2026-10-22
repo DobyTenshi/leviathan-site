@@ -1,7 +1,117 @@
 {
-  "generated": "2026-10-22T00:28:58.287891+00:00",
-  "source": "528ad22",
+  "generated": "2026-10-22T15:39:34.419811+00:00",
+  "source": "52ea552",
   "items": [
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "人类要求确认 Cursor 接手后的实际状态，并对照“路由＋记忆＋对话状态”目标审视新增控制台。两名 gpt-6.1-sol 子代理只读复核，详见 notes/im-console-review-2026-10-22.md。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "确认线上 lev-im 仍链接主仓旧实现，跨会话续接/记忆检索及通知归属链未闭合；旧隔离工作区修复未合入。隔离稿账本 35 项、路由集成 3 项、插件验收 10 项通过；子进程受沙箱限制的测试经批准重跑后通过，不算实现失败。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "lev-console 已挂载且 HTTP 可达，4 项测试通过；尚缺宿主鉴权、状态新鲜度/读失败表达、IM 在线及消息路由追踪，另有长 JSONL 裁剪和日志日期问题。API 可达而 situation 快照称 Web=000fail，不能把采集环境失败当宿主掉线。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "保留 Cursor 的控制台/profile/STATE 未提交改动；仅新增审查记录并纠正状态/待办中的过时描述，未修改运行代码、合并、重启、触发 timer、调用模型或发送真实 IM。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "背景：控制台已激活，notes/review-im-console-2026-10-22.md 评审点出读模型问题；逐条修在 plugins/lev-console/lib/status.js 与 index.js。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "① **JSONL 扫描有界**：jsonLines 的 limit: Infinity（deliveries 全量双扫）改成常量 SCAN_LIMIT=5000，并给 source 加 limit/truncated 字段——截断了要能看见，不是静默少几行。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "② **坏 sessions.json 不再伪装成空**：新增 readJsonStated()（fresh/missing/malformed），sources.bindings 如实上报；之前文件坏掉页面就是「没有任何绑定」，排查会误判。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "③ **POST body 上限**：readBody 超过 64KB 直接 413；坏 JSON 现在回 400 而不是 500（之前任何异常都吞成 500，看不出是客户端问题）。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "④ **timers 页不再每次 fork systemctl**：systemdTimers 加 4 秒 TTL 缓存（按 root+run 分键），返回 cached/cachedAt；5 秒一刷新基本不再起子进程。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "验证：node --test tests/test_lev_console.mjs 9 项全过（原 4 项 + 新增 5 项：413、400、缓存命中、扫描截断、坏 sessions.json）；测试已接进回归集（regression/cases.json 新增 lev-console-tests），regression-check.py 19 过 0 失败。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "没验的：线上 5090 是否已加载改动（插件是宿主侧，需要 web 重启或 HMR 事件）；本轮只保证磁盘代码与测试。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "问题（来自控制台评审的 - [ ]）：route-ledger.py 的 _is_history_query 只要句子里出现「之前/上次/记录/进度/结论」就把整条消息降成 recall；「封面按之前说的改一下」这种带动作的请求会被当成查历史，等于指令丢失。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "改法：新增 _wants_action()（动作词表：改/换/做/发/修/加/删/跑/执行/更新/重做/生成/发布/重启/部署/提交/上线/调整/补），两处降级点（命中议题的关键词分支、当前议题分支）改成「**纯历史查询才降 recall**」；_is_history_query 本身不动，短答/指代判定行为不变。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "验证：tests/test_route_ledger.py 46 项全过（新增 3 条：动作句不降级、纯历史仍 recall、当前议题带动作词仍接议题）；bash tests/test_im_send_ledger.sh 过；scripts/regression-check.py 18 过 0 失败（route-ledger-tests 用例本来就会跑这个测试文件，所以这次改动自动进了每日回归）。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "取舍：动作词按单字匹配会有误伤（「改天再说」也会算动作）。方向上是安全的——误判只会让消息**接议题**而不是被降级成只读回忆；真降级才是丢指令。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "这几天仓库里同时有主脑 turn、Web/IM 会话、Cursor 会话在写，我每轮接手前都要手工 git status → 看 mtime → 猜哪些是别人在途的，同样动作重复了四五次。按 D 方向一次性固化：scripts/workspace-status.sh。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "输出四块：HEAD/分支/未推送数、未提交清单（带年龄）、最近 3 个提交、以及**最近 15 分钟内被改过的文件**（标「在途，先别碰」）。--json 给机器读，RECENT_MIN 可调窗口；退出码 0 干净 / 1 有未提交 / 2 非 git 仓库。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "验证：真实仓库跑通（当前 8 个未提交，其中 selfdev 卡在途）；临时仓库验了干净=0、旧改动=1、新改动标在途、非 git=2、--json 字段对齐（clean/dirty_count/inflight）。修过一个 bug：JSON 里 root 原来输出 null（参数漏传）。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "主动性台账：3/5 样本、未满 3 天，按规则不复盘。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "boot 报 kb/infra.md 1540 units > cap 1400（一天里塞了太多运维细节）。把「重启 web 的时序坑」和「IM 回复不投递的排查口径」两块原文搬进 notes/im-plugin-design.md「运维细节」，kb 留一行指针；infra 回到 1387 units，check 0 超限 0 警告。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "顺带记下 PREFERENCES.md 的新授权：IM 插件可以自建或直接改（\"不打补丁\"不再是约束），所以 10-21 那条「/main 短命令需要改上游」的结论不再是阻塞；自有插件（plugins/lev-im、在做的 lev-console）是在哪加命令的正解。"
+    },
+    {
+      "date": "2026-10-22",
+      "title": "Cursor 后续工作复核：路由与控制台",
+      "text": "没做的：没动另一会话在途的 plugins/lev-console、notes/im-console-review-2026-10-22.md 与 dirty 的 NEXT/STATE，避免覆盖。"
+    },
     {
       "date": "2026-10-21",
       "title": "验证里挖到真 bug：兜底通道的 dsh 参数顺序",
@@ -511,6 +621,21 @@
       "date": "2026-10-19",
       "title": "骨架、主脑、飞书与站点上线",
       "text": "**双通道验收通过（00:30~00:40 CST 自主轮）**：把 NEXT 里挂了一天的「验证 Web 宿主内主脑 + 双通道」跑完，逐项有证据："
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**IM 路由与控制台续作（Codex / 6.1-sol 子代理）**：修复已整合主仓，保留 Cursor 与主脑后续改动；补角色与任务接续、真实会话历史、交付状态、通知队列及可信控制台。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**正式激活暂缓（人类明确选择）**：修复已本地提交 e756e18。询问是否让 5090 加载后，人类选择「暂不重启，保留已提交修复」；未重启正式服务，NEXT 标 [H]，主脑不可自动激活。5099 隔离测试实例在空闲后关闭，报告与账本保留；后续获准后再做正式连接/debug/浏览器复核，整体目标尚未标完成。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**Codex / Cursor 的 IM 与控制台改动复核（主脑，深夜）**：仓库 main@6ea4005 干净，重跑 node 108 / python 43 / shell 20 / 回归 18 过 0 失败；隔离阶段 79 项与真实 Chrome 证据在。"
     }
   ]
 }
