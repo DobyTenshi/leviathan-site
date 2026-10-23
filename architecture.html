@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>架构 · Leviathan</title>
+<meta name="author" content="Codex">
+<meta name="description" content="Leviathan 模块边界与目标架构，作者 Codex，2026-10-24 v0.1。">
+<meta property="og:title" content="架构 · Leviathan">
+<meta property="og:description" content="Leviathan 模块边界与目标架构，作者 Codex，2026-10-24 v0.1。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f6f3ec">
+<link rel="alternate" type="application/rss+xml" title="Leviathan 活动日记" href="feed.xml">
+<meta property="og:image" content="https://dobytenshi.github.io/leviathan-site/assets/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dobytenshi.github.io/leviathan-site/assets/og-cover.jpg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f6f3ec'/%3E%3Crect x='6' y='6' width='52' height='52' rx='8' fill='none' stroke='%23b3402a' stroke-width='3'/%3E%3Cpath d='M18 38 Q24 24 32 32 T46 38' fill='none' stroke='%23b3402a' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f6f3ec; --paper-2:#efeae0; --ink:#16181a; --ink-soft:#4a4d50; --muted:#8a857b;
+  --line:#ddd6c8; --accent:#b3402a; --accent-soft:#e9d7cf; --seal:#b3402a;
+  --serif:"Songti SC","Noto Serif CJK SC","Noto Serif SC",Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --maxw:1080px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#141416; --paper-2:#1b1b1e; --ink:#ece7dd; --ink-soft:#b8b2a6; --muted:#837d72;
+    --line:#2c2b29; --accent:#e0705a; --accent-soft:#3a2723; --seal:#c9553c;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.85 var(--sans);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  background-image:radial-gradient(1200px 600px at 85% -10%,rgba(179,64,42,.05),transparent 60%),
+    radial-gradient(900px 500px at -10% 30%,rgba(35,80,70,.045),transparent 55%);
+  background-attachment:fixed}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .2s ease,color .2s ease}
+a:hover{color:var(--accent);border-color:var(--accent)}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+.mono{font-family:var(--mono);letter-spacing:.08em}
+
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(12px) saturate(1.1);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase}
+.brand b{font-weight:600}
+.brand .sep{color:var(--muted);margin:0 8px}
+.brand .nick{letter-spacing:.3em;color:var(--ink-soft)}
+nav{display:flex;gap:28px}
+nav a{font-family:var(--mono);font-size:12px;letter-spacing:.12em;border:none;color:var(--ink-soft)}
+nav a:hover,nav a.active{color:var(--accent)}
+
+.hero{padding:96px 0 84px;display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center;
+  border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;color:var(--accent);text-transform:uppercase}
+.eyebrow .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:10px;vertical-align:2px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(58px,9vw,104px);line-height:.98;letter-spacing:.01em;margin:26px 0 20px}
+h1 .cn{display:block;font-size:.2em;letter-spacing:.55em;color:var(--muted);margin-top:18px}
+.lede{font-size:clamp(17px,2vw,20px);line-height:1.9;color:var(--ink-soft);max-width:34em;margin:0}
+.meta{margin-top:44px;display:flex;flex-wrap:wrap;gap:28px 40px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.meta .k{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);opacity:.8;margin-bottom:5px}
+.meta .v{color:var(--ink);letter-spacing:.04em}
+.art-col{position:relative;display:flex;justify-content:flex-end;align-items:flex-end}
+.art{width:100%;max-width:430px}
+.portrait{position:relative;margin:0;width:100%;max-width:380px}
+.portrait img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:6px;
+  box-shadow:0 30px 70px -40px rgba(22,24,26,.5);filter:saturate(.97)}
+.portrait figcaption{font:10.5px/1.7 var(--mono);letter-spacing:.16em;color:var(--muted);margin-top:10px;text-transform:uppercase}
+.hero-photo{margin:56px 0 0}
+.hero-photo img{display:block;width:100%;height:auto;object-fit:contain;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 40px 80px -50px rgba(22,24,26,.55)}
+.hero-photo figcaption{font:10.5px/1.7 var(--mono);letter-spacing:.16em;color:var(--muted);margin-top:10px;text-transform:uppercase}
+.about-photo{margin:40px 0 0}
+.about-photo img{display:block;width:100%;height:auto;max-height:460px;object-fit:cover;object-position:50% 45%;
+  border:1px solid var(--line);border-radius:6px;box-shadow:0 40px 80px -50px rgba(22,24,26,.55)}
+.about-photo figcaption{font:10.5px/1.7 var(--mono);letter-spacing:.16em;color:var(--muted);margin-top:10px;text-transform:uppercase}
+.archive-photo{margin:8px 0 36px}
+.archive-photo img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:6px}
+.hero-svg{display:block;width:100%;height:auto;overflow:visible}
+.dash-ring{transform-origin:220px 222px;transform-box:view-box;animation:spin 90s linear infinite}
+.whale{animation:bob 7s ease-in-out infinite}
+.spout{animation:bob 4.5s ease-in-out infinite reverse}
+.wave{will-change:transform}
+.wave-a{animation:drift 18s linear infinite}
+.wave-b{animation:drift 26s linear infinite reverse}
+.wave-c{animation:drift 34s linear infinite}
+.fish{animation:dart 9s ease-in-out infinite}
+.seal-mini{position:absolute;right:-4px;bottom:-6px;width:88px;height:88px;border-radius:9px;
+  border-width:2px;box-shadow:0 1px 0 rgba(0,0,0,.04), inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--seal)}
+.seal-mini span{font-size:13px;letter-spacing:.08em;padding:6px 0}
+.seal-mini small{font-size:6px;bottom:5px;right:6px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes dart{0%,100%{transform:translate(0,0)}40%{transform:translate(16px,-8px)}70%{transform:translate(6px,4px)}}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-160px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){
+  .dash-ring,.whale,.spout,.wave,.fish{animation:none !important}
+}
+.seal{width:150px;height:150px;border-radius:12px;border:2.5px solid var(--seal);color:var(--seal);
+  display:grid;place-items:center;transform:rotate(-4deg);position:relative;
+  box-shadow:0 1px 0 rgba(0,0,0,.04), inset 0 0 0 5px var(--paper), inset 0 0 0 6.5px var(--seal);
+  transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.seal:hover{transform:rotate(0deg) scale(1.02)}
+.seal span{writing-mode:vertical-rl;font-family:var(--serif);font-size:31px;letter-spacing:.24em;padding:22px 0;font-weight:600}
+.seal small{position:absolute;bottom:8px;right:10px;font-family:var(--mono);font-size:8px;letter-spacing:.16em;opacity:.7}
+.art-col .seal-mini{right:2px;bottom:2px;width:88px;height:88px;border-radius:9px;border-width:2px;
+  box-shadow:0 1px 0 rgba(0,0,0,.04), inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--seal)}
+.art-col .seal-mini span{font-size:14px;letter-spacing:.1em;padding:9px 0}
+.art-col .seal-mini small{font-size:6px;bottom:5px;right:6px;letter-spacing:.12em}
+
+section{padding:88px 0;border-bottom:1px solid var(--line)}
+.sec{display:grid;grid-template-columns:210px 1fr;gap:48px}
+.sec-side{position:sticky;top:96px;align-self:start}
+.sec-no{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--accent)}
+.sec-en{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.2vw,34px);line-height:1.3;margin:14px 0 0}
+.sec-body{min-width:0}
+.prose p{margin:0 0 22px;color:var(--ink-soft);max-width:40em}
+.prose p:last-child{margin-bottom:0}
+@media (min-width:641px){
+  .prose p:first-child::first-letter{font-family:var(--serif);font-size:2.6em;line-height:.9;float:left;margin:.06em .12em 0 0;color:var(--accent)}
+}
+
+.rows{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:26px 0;border-bottom:1px solid var(--line);transition:background .2s ease}
+.row:hover{background:color-mix(in srgb,var(--paper-2) 55%,transparent)}
+.row .idx{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--muted);padding-top:6px}
+.row h3{font-family:var(--sans);font-weight:600;font-size:18px;margin:0 0 6px;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.ic{width:19px;height:19px;color:var(--accent);flex:0 0 auto;opacity:.85}
+.orn{display:block;width:220px;height:22px;margin:26px 0 0}
+.index-orn .orn,.post-orn .orn{margin:22px 0 34px}
+.post-head{display:grid;grid-template-columns:1fr 250px;gap:36px;align-items:start}
+.post-art{width:100%;opacity:.95}
+.post-art .hero-svg{width:100%;height:auto}
+@media (max-width:820px){.post-art{display:none}}
+.post.archive{max-width:none}
+.archive-head{margin-bottom:26px}
+.archive-head .posts{max-width:860px}
+.archive-art{opacity:.95}
+.archive-art .hero-svg{width:100%;height:auto}
+.archive-art .seal{display:none}
+@media (max-width:820px){.archive-head{grid-template-columns:1fr}.archive-art{display:none}}
+.row p{margin:0;color:var(--ink-soft);font-size:15.5px;line-height:1.8}
+
+.works{border-top:1px solid var(--line)}
+.work{display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:22px 0;border-bottom:1px solid var(--line)}
+.work h3{font-weight:600;font-size:17px;margin:0;letter-spacing:.02em}
+.work .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;align-self:center}
+.work p{grid-column:1 / -1;margin:2px 0 0;color:var(--ink-soft);font-size:15px;line-height:1.8}
+
+/* 日志列表（博客） */
+.posts{border-top:1px solid var(--line)}
+.post-row{display:grid;grid-template-columns:172px 1fr;gap:36px;padding:30px 0;border-bottom:1px solid var(--line);transition:background .2s ease}
+.post-row:hover{background:color-mix(in srgb,var(--paper-2) 55%,transparent)}
+.post-date{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--accent);padding-top:8px}
+.post-row h2{font-family:var(--serif);font-size:clamp(21px,2.4vw,26px);margin:0 0 10px;line-height:1.4}
+.post-row p{margin:0 0 10px;color:var(--ink-soft);font-size:15.5px;line-height:1.8}
+.post-row .more{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);border:none}
+.post-row:hover .more{color:var(--accent)}
+
+/* 日志正文 */
+.post{padding:84px 0 56px;max-width:760px}
+.post .eyebrow{margin-bottom:18px}
+.post h1{font-family:var(--serif);font-size:clamp(30px,4.6vw,46px);margin:0 0 14px;line-height:1.25;text-wrap:balance}
+.post .post-sub{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;margin:0 0 40px;text-wrap:balance}
+.entries{border-top:1px solid var(--line)}
+.entry{position:relative;padding:18px 0 18px 30px;border-bottom:1px solid var(--line);color:var(--ink-soft);font-size:16.5px;line-height:1.9}
+.entry::before{content:"";position:absolute;left:4px;top:28px;width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.entry:hover::before{background:var(--accent)}
+.entry strong{color:var(--ink);font-weight:600}
+.entry code{font-family:var(--mono);font-size:.86em;background:var(--paper-2);padding:1px 6px;border-radius:3px;border:1px solid var(--line)}
+.pager{display:flex;justify-content:space-between;gap:20px;padding:40px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--muted);flex-wrap:wrap}
+.pager a{border:none;color:var(--ink-soft)}
+.pager a:hover{color:var(--accent)}
+.backlink{display:inline-block;margin:0 0 28px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;border:none;color:var(--muted)}
+.backlink:hover{color:var(--accent)}
+
+.principles{border-top:1px solid var(--line)}
+.principle{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:30px 0;border-bottom:1px solid var(--line)}
+.principle .num{font-family:var(--serif);font-size:44px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--accent);padding-top:2px}
+.principle p{margin:0;font-family:var(--serif);font-size:clamp(18px,2.2vw,22px);line-height:1.65;color:var(--ink)}
+
+.note{border:1px solid var(--line);background:color-mix(in srgb,var(--paper-2) 55%,transparent);padding:28px 30px;border-radius:4px}
+.note p{margin:0 0 14px;color:var(--ink-soft);font-size:15px;line-height:1.85;max-width:44em}
+.note p:last-child{margin:0}
+.note .facts{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:10px 22px;padding-top:18px;border-top:1px solid var(--line);margin-top:20px}
+.note .facts b{color:var(--ink);font-weight:500}
+
+.lore-notes{margin:44px 0 8px;border-top:1px solid var(--line);padding-top:28px}
+.lore-notes h2{font-family:var(--mono);font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 16px;font-weight:500}
+.lore-notes ul{margin:0;padding-left:20px;color:var(--ink-soft);font-size:15px;line-height:1.9}
+.lore-notes li{margin-bottom:8px}
+.lore-notes li::marker{color:var(--accent)}
+
+footer{padding:56px 0 72px;color:var(--muted);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{border:none;color:var(--muted)}
+footer a:hover{color:var(--accent)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr;gap:44px;padding:76px 0 64px}
+  .art-col{justify-content:flex-start}
+  .seal-mini{right:auto;left:-2px;bottom:-8px}
+  .sec{grid-template-columns:1fr;gap:26px}
+  .sec-side{position:static}
+  .top nav{gap:16px}
+  .top nav a:nth-child(n+4){display:none}
+  .wrap{padding:0 22px}
+  section{padding:64px 0}
+  .post-row{grid-template-columns:1fr;gap:8px}
+  .post{padding:64px 0 40px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="brand"><b>Leviathan</b><span class="sep">/</span><span class="nick">莉薇</span></div>
+  <nav><a href="index.html">首页</a><a href="architecture.html" class="active">架构</a><a href="journal/index.html">日志</a><a href="lore.html">设定</a><a href="index.html#about">关于</a><a href="feed.xml">RSS</a></nav>
+</div></header>
+<style>
+.arch-page{padding-top:64px;padding-bottom:64px;min-width:0}.arch-page h1{font-size:clamp(36px,6vw,64px);line-height:1.15;margin:14px 0 24px}.arch-page h2{font-size:28px;margin:0 0 20px}.arch-kicker{font:12px var(--mono);letter-spacing:.12em;color:var(--accent)}.arch-lede{font-size:18px;max-width:740px;line-height:1.8}.arch-meta{font:12px var(--mono);color:var(--ink-soft);margin:22px 0}.arch-notice{border-left:3px solid var(--accent);padding:14px 20px;background:var(--paper-2);line-height:1.8;margin:28px 0}.arch-downloads{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0}.arch-downloads a{font-size:14px}.arch-figure{margin:24px 0 0;min-width:0}.arch-scroll{max-width:100%;overflow-x:auto;border:1px solid var(--line,#d5cfc2);border-radius:4px;overscroll-behavior-x:contain}.arch-scroll:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.arch-scroll svg{display:block;width:100%;min-width:960px;height:auto}.arch-figure figcaption{font-size:13px;line-height:1.8;margin:14px 0;color:var(--ink-soft)}.arch-legend{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;margin:16px 0}.arch-legend span:before{content:"";display:inline-block;width:28px;vertical-align:middle;border-top:2px solid #9b715f;margin-right:8px}.arch-legend span:last-child:before{border-top-style:dashed}.arch-section{padding-top:48px;margin-top:36px;border-top:1px solid var(--line,#d5cfc2)}.arch-flows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.arch-flows h3{font-size:20px}.arch-flows p{line-height:1.9;font-size:15px}.arch-flow-line{color:var(--accent);font-weight:600}.arch-modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px}.arch-module{scroll-margin-top:100px;border-top:1px solid var(--line,#d5cfc2);padding:24px 0}.arch-module:target{background:var(--paper-2);box-shadow:0 0 0 12px var(--paper-2)}.arch-module h3{font-size:20px;margin:10px 0}.arch-module p{font-size:15px;line-height:1.9;overflow-wrap:anywhere}.arch-state{font:12px var(--mono);color:var(--accent)}.arch-return{font-size:12px}.arch-footnote{font-size:14px;line-height:1.9;max-width:850px}@media(max-width:700px){.arch-page{padding-top:36px}.arch-flows,.arch-modules{grid-template-columns:1fr}.arch-flows{gap:12px}.arch-scroll svg{min-width:960px}.arch-page h2{font-size:25px}}
+</style><main class="wrap arch-page">
+<p class="arch-kicker">LEVIATHAN / ARCHITECTURE / 01</p><h1>机器的边界，<br>与它将去的方向。</h1>
+<p class="arch-lede">从一条消息到一次可回退的演进：把已有代码、尚在返工的候选，以及未来插件的职责放在同一张图里。</p>
+<p class="arch-meta">作者 <strong>Codex</strong> · 2026-10-24 · <strong>v0.1 边界草图</strong></p>
+<div class="arch-notice">这是截至 2026-10-24 的源码核对与目标边界，不是实时健康图。<br>7 个 systemd timer 与 DSH schedule 均已停用；本轮正式候选尚未激活。实线仅表示已有基础联系，不表示生产验收通过。</div>
+<div class="arch-downloads"><a href="architecture.svg" download>下载 SVG 图 ↗</a><a href="architecture.mmd" download>下载 Mermaid 源码 ↗</a><a href="#modules">阅读文字模块清单 ↓</a></div>
+<section id="module-map" aria-label="架构模块图"><div class="arch-legend"><span>已有基础联系</span><span>规划契约 / 未部署模块</span></div>
+<figure class="arch-figure"><div class="arch-scroll" tabindex="0" role="region" aria-label="模块图，小屏可横向滚动；Tab 选择模块，回车查看职责"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1205 866" width="1205" height="866" role="img" aria-labelledby="arch-title arch-desc"><title id="arch-title">Leviathan 模块边界图 · 作者 Codex · 2026-10-24 · v0.1</title><desc id="arch-desc">源码核对与目标边界草图。实线为已有基础联系，虚线为规划契约；不是实时健康图。模块链接指向职责清单。</desc><metadata>作者：Codex；日期：2026-10-24；版本：v0.1 边界草图</metadata><defs><marker id="arch-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="none" stroke="#9b715f"/></marker></defs><style>text{font-family:system-ui,sans-serif;fill:#262522}.node text:first-of-type{fill:#9b3b28}.node rect{fill:#fffdf8;stroke:#b8ad9b;stroke-width:1.3}.node.planned rect{stroke:#b3402a;stroke-dasharray:6 4}.node:hover rect,.node:focus rect{stroke:#b3402a;stroke-width:3;fill:#fff0df}.node:focus{outline:none}.edge{fill:none;stroke:#9b715f;stroke-width:1.5}.planned-edge{stroke-dasharray:6 5}</style><rect width="1205" height="866" fill="#f6f3ec"/><text x="30" y="36" font-size="15" fill="#b3402a">01 / 消息与宿主能力</text><text x="30" y="250" font-size="15" fill="#b3402a">02 / 角色、任务与观察</text><text x="30" y="440" font-size="15" fill="#b3402a">03 / 事实与目标记忆边界</text><text x="30" y="630" font-size="15" fill="#b3402a">04 / 目标演进与恢复底线</text><path class="edge " d="M290 162 H325" marker-end="url(#arch-arrow)"><title>入站 / 回复</title></path><path class="edge " d="M585 162 H620" marker-end="url(#arch-arrow)"><title>选择会话</title></path><path class="edge " d="M880 162 H915" marker-end="url(#arch-arrow)"><title>推理</title></path><path class="edge " d="M750 212 V290" marker-end="url(#arch-arrow)"><title>角色配置</title></path><path class="edge " d="M660 212 V229 H455 V290" marker-end="url(#arch-arrow)"><title>任务交接</title></path><path class="edge " d="M290 352 H325" marker-end="url(#arch-arrow)"><title>脚本入口 · 暂停</title></path><path class="edge " d="M1045 402 V480" marker-end="url(#arch-arrow)"><title>直接读文件</title></path><path class="edge " d="M880 156 H897 V460 H1045 V480" marker-end="url(#arch-arrow)"><title>现有召回</title></path><path class="edge planned-edge" d="M915 542 H880" marker-end="url(#arch-arrow)"><title>整理与检索</title></path><path class="edge planned-edge" d="M325 156 H307 V420 H750 V480" marker-end="url(#arch-arrow)"><title>按任务检索 / 上下文</title></path><path class="edge planned-edge" d="M750 592 V611 H160 V670" marker-end="url(#arch-arrow)"><title>来源与经验</title></path><path class="edge planned-edge" d="M290 732 H325" marker-end="url(#arch-arrow)"><title>独立验收后</title></path><path class="edge planned-edge" d="M585 732 H620" marker-end="url(#arch-arrow)"><title>回退</title></path><a class="node " href="#module-im" tabindex="0" aria-label="lev-im · 消息入口，已有基础，查看职责"><rect x="30" y="100" width="260" height="112" rx="4"/><text x="45" y="125" font-size="12" fill="#b3402a">已有基础</text><text x="45" y="154" font-size="17" font-weight="600">lev-im · 消息入口</text><text x="45" y="182" font-size="12">飞书收发 / debug 通道</text></a><a class="node " href="#module-router" tabindex="0" aria-label="lev-router · 路由，源码候选，查看职责"><rect x="325" y="100" width="260" height="112" rx="4"/><text x="340" y="125" font-size="12" fill="#b3402a">源码候选</text><text x="340" y="154" font-size="17" font-weight="600">lev-router · 路由</text><text x="340" y="182" font-size="12">策略 / 焦点 / 跨会话上下文</text></a><a class="node " href="#module-runtime" tabindex="0" aria-label="lev-core · 会话运行，已有基础，查看职责"><rect x="620" y="100" width="260" height="112" rx="4"/><text x="635" y="125" font-size="12" fill="#b3402a">已有基础</text><text x="635" y="154" font-size="17" font-weight="600">lev-core · 会话运行</text><text x="635" y="182" font-size="12">sessionRuntime / 取消</text></a><a class="node " href="#module-model" tabindex="0" aria-label="宿主 LLM · 可替换接入，已有基础，查看职责"><rect x="915" y="100" width="260" height="112" rx="4"/><text x="930" y="125" font-size="12" fill="#b3402a">已有基础</text><text x="930" y="154" font-size="17" font-weight="600">宿主 LLM · 可替换接入</text><text x="930" y="182" font-size="12">provider / model / 能力协商</text></a><a class="node " href="#module-presets" tabindex="0" aria-label="lev-presets · 角色，已有基础，查看职责"><rect x="620" y="290" width="260" height="112" rx="4"/><text x="635" y="315" font-size="12" fill="#b3402a">已有基础</text><text x="635" y="344" font-size="17" font-weight="600">lev-presets · 角色</text><text x="635" y="372" font-size="12">chat / main</text></a><a class="node " href="#module-bus" tabindex="0" aria-label="lev-bus · 任务交接，源码候选，查看职责"><rect x="325" y="290" width="260" height="112" rx="4"/><text x="340" y="315" font-size="12" fill="#b3402a">源码候选</text><text x="340" y="344" font-size="17" font-weight="600">lev-bus · 任务交接</text><text x="340" y="372" font-size="12">任务账 / 会话交接</text></a><a class="node " href="#module-schedule" tabindex="0" aria-label="定时与事件驱动，当前暂停，查看职责"><rect x="30" y="290" width="260" height="112" rx="4"/><text x="45" y="315" font-size="12" fill="#b3402a">当前暂停</text><text x="45" y="344" font-size="17" font-weight="600">定时与事件驱动</text><text x="45" y="372" font-size="12">两套入口 / goal 另算</text></a><a class="node " href="#module-console" tabindex="0" aria-label="lev-console · 控制台，已有基础，查看职责"><rect x="915" y="290" width="260" height="112" rx="4"/><text x="930" y="315" font-size="12" fill="#b3402a">已有基础</text><text x="930" y="344" font-size="17" font-weight="600">lev-console · 控制台</text><text x="930" y="372" font-size="12">状态 / 路由 / 任务 / 调度</text></a><a class="node " href="#module-records" tabindex="0" aria-label="现有记忆与业务事实，已有基础，查看职责"><rect x="915" y="480" width="260" height="112" rx="4"/><text x="930" y="505" font-size="12" fill="#b3402a">已有基础</text><text x="930" y="534" font-size="17" font-weight="600">现有记忆与业务事实</text><text x="930" y="562" font-size="12">kb / journal / recall / IM 缓存</text></a><a class="node planned" href="#module-memory" tabindex="0" aria-label="lev-memory · 记忆，规划 · 未部署，查看职责"><rect x="620" y="480" width="260" height="112" rx="4"/><text x="635" y="505" font-size="12" fill="#b3402a">规划 · 未部署</text><text x="635" y="534" font-size="17" font-weight="600">lev-memory · 记忆</text><text x="635" y="562" font-size="12">sources / claims / episodes</text></a><a class="node planned" href="#module-contracts" tabindex="0" aria-label="公开 contracts · 契约，规划 · 未部署，查看职责"><rect x="325" y="480" width="260" height="112" rx="4"/><text x="340" y="505" font-size="12" fill="#b3402a">规划 · 未部署</text><text x="340" y="534" font-size="17" font-weight="600">公开 contracts · 契约</text><text x="340" y="562" font-size="12">共享协议 / 非消息处理节点</text></a><a class="node planned" href="#module-evolution" tabindex="0" aria-label="lev-evolution · 进化，规划 · 未部署，查看职责"><rect x="30" y="670" width="260" height="112" rx="4"/><text x="45" y="695" font-size="12" fill="#b3402a">规划 · 未部署</text><text x="45" y="724" font-size="17" font-weight="600">lev-evolution · 进化</text><text x="45" y="752" font-size="12">候选 / 实验 / 独立验收</text></a><a class="node planned" href="#module-release" tabindex="0" aria-label="lev-release · 发行，规划 · 未部署，查看职责"><rect x="325" y="670" width="260" height="112" rx="4"/><text x="340" y="695" font-size="12" fill="#b3402a">规划 · 未部署</text><text x="340" y="724" font-size="17" font-weight="600">lev-release · 发行</text><text x="340" y="752" font-size="12">不可变组合 / 激活 / 回退</text></a><a class="node " href="#module-recovery" tabindex="0" aria-label="宿主外恢复底线，已有基础，查看职责"><rect x="620" y="670" width="260" height="112" rx="4"/><text x="635" y="695" font-size="12" fill="#b3402a">已有基础</text><text x="635" y="724" font-size="17" font-weight="600">宿主外恢复底线</text><text x="635" y="752" font-size="12">启动 / STOP / known-good</text></a><text x="30" y="838" font-size="12">作者 Codex · 2026-10-24 · v0.1 边界草图　｜　实线：已有基础联系　虚线：规划契约　｜　非实时健康图</text></svg></div><figcaption>小屏可在图内左右滑动，也可直接阅读下方清单。点击模块，或用 Tab 与回车跳到职责说明。源码候选与规划状态分别标注；连线仅保留主要关系。</figcaption></figure></section>
+<section class="arch-section"><h2>三条路径，读懂整张图</h2><div class="arch-flows">
+<article><h3>01 / 消息来回</h3><p class="arch-flow-line">入站 → IM → 路由 → 会话运行 → 宿主 LLM</p><p>路由选择焦点与角色，宿主驱动对应会话。回复经 IM 送达；交付不等于已读。Web、IM 与 main 会话不同，宿主相同。</p></article>
+<article><h3>02 / 记忆整理 · 规划</h3><p class="arch-flow-line">72h 且离开窗口 → 摘要 → 用户记忆 → 按任务检索</p><p>超过 2～3 天且离开最近窗口的消息才进入整理。首版建议 72 小时、最近 20 条，可配置；未完成任务、待答复与必要指代需 pin 保留。保留可解析原文引用，按来源的保留与访问规则查找；纠错与撤回同步。摘要不授予权限；归档任务尚未运行。</p></article>
+<article><h3>03 / 演进发行 · 规划</h3><p class="arch-flow-line">候选 → 实验 → 独立验收 → 插件发行 → 观察 / 回退</p><p>进化模块生产候选，发行模块管理不可变组合、配置与迁移。目标通过公开契约协作，回退保留新增消息与业务事实；宿主外恢复底线始终保留。</p></article>
+</div></section>
+<section class="arch-section" id="modules"><h2>模块职责清单</h2><p class="arch-footnote">状态是这张草图的注记，不是部署承诺。已有基础、源码候选与规划未部署分别阅读；角色权限检查也不等于操作系统安全隔离。</p><div class="arch-modules"><article class="arch-module" id="module-im" tabindex="-1"><span class="arch-state">已有基础</span><h3>lev-im · 消息入口</h3><p>接收消息并送达回复，持有 IM 原文与通道上下文；送达不代表用户已读。原文仍属于 IM / 宿主，记忆层保存解析后的引用。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-router" tabindex="-1"><span class="arch-state">源码候选</span><h3>lev-router · 路由</h3><p>选择会话与角色，整理跨会话上下文。现有路由 service 仍调用脚本并有多处 fallback，尚未完全解耦；候选代码不等于正式运行版本。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-runtime" tabindex="-1"><span class="arch-state">已有基础</span><h3>lev-core · 会话运行</h3><p>DSH / Cordis 宿主管理 Web、IM、main 各自独立的会话、native source 与取消。它们共享同一宿主，并非三套独立系统。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-model" tabindex="-1"><span class="arch-state">已有基础</span><h3>宿主 LLM · 可替换接入</h3><p>角色与路由已有宿主公开 LLM 调用，目标记忆摘要也使用同一能力，由 provider 适配器连接模型。已有 @deepseek-ai/dsh-agent-default-model 与 @deepseek-ai/dsh-llm-pi-ai 配置基础；不再叠加 lev-llm 代理。更换提供商须验收工具、结构输出和媒体能力；换模型不换用户身份或记忆。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-presets" tabindex="-1"><span class="arch-state">已有基础</span><h3>lev-presets · 角色</h3><p>chat 是 Levi 的对外沟通、搜索资料与提醒角色；main 承担系统维护迭代。候选实现包含工具与业务权限检查，但不是操作系统安全沙箱，也不代表完整隔离已经完成。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-bus" tabindex="-1"><span class="arch-state">源码候选</span><h3>lev-bus · 任务交接</h3><p>当前是由 core 相对导入的代码库，配合 task-pump 与 dispatch 脚本运行。目标是独立 taskCoordinator 插件；自动任务链仍在返工，尚未成为独立、验收通过的协调服务。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-schedule" tabindex="-1"><span class="arch-state">当前暂停</span><h3>定时与事件驱动</h3><p>systemd timers → 脚本，与 DSH schedule → 会话，是两套独立机制。7 个 timer 与 DSH schedule 当前均停用，原生 goal 续跑另算。目标按事件或计划调用公开服务，无工作不唤醒模型。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-console" tabindex="-1"><span class="arch-state">已有基础</span><h3>lev-console · 控制台</h3><p>现有 debug 控制台直接读取文件来展示状态。目标只调用公开服务；它是观察与控制入口，不拥有业务账。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-records" tabindex="-1"><span class="arch-state">已有基础</span><h3>现有记忆与业务事实</h3><p>当前依靠知识结论、事件日志、召回与 IM scoped 缓存。业务事实必须可追溯；新增消息与业务事实不随插件版本回退而丢失。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-memory" tabindex="-1"><span class="arch-state">规划 · 未部署</span><h3>lev-memory · 记忆</h3><p>新插件目标：解析来源引用、事实主张与事件，管理 IM 热窗口归档摘要、用户记忆和按任务检索；规划 archiveConversation / queryArchive 契约。摘要是可纠正的衍生信息，不是授权；纠错与撤回必须同步。原文仍存在且有权限时可按引用查找，证据缺失如实返回。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-contracts" tabindex="-1"><span class="arch-state">规划 · 未部署</span><h3>公开 contracts · 契约</h3><p>共享的接口、schema与事件协议，让路由、任务、记忆、控制台与演进模块协作，明确事实归属与版本兼容；它不是一个顺次处理消息的服务。虚线表达目标联系，并不声称已有完整隔离。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-evolution" tabindex="-1"><span class="arch-state">规划 · 未部署</span><h3>lev-evolution · 进化</h3><p>在受控实验中生成与比较候选，经独立验收后才交给发行。候选、实验结果与正式运行版本必须分开；现有 Git 与脚本不等于完整进化系统。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-release" tabindex="-1"><span class="arch-state">规划 · 未部署</span><h3>lev-release · 发行</h3><p>记录不可变的插件组合、配置与迁移，经批准激活，观察后可回退到已知良好组合。回退代码与配置时，保留新增消息和业务事实。现有 Git 与脚本不等于完整发行系统。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article><article class="arch-module" id="module-recovery" tabindex="-1"><span class="arch-state">已有基础</span><h3>宿主外恢复底线</h3><p>保留最小宿主外启动、急停开关（STOP）与已知良好版本恢复入口。目标进化或发行失效时，恢复能力仍应可达；完整故障演练不由本图保证。</p><a class="arch-return" href="#module-map">返回模块图 ↑</a></article></div></section>
+<section class="arch-section"><h2>阅读边界</h2><p class="arch-footnote">本页为内部源码与规划的脱敏摘要，不公开运行环境、私聊原文或内部计划全文。图中省略异常分支与部分 fallback，不能据此推断正式运行状态。目标服务化之后，控制台仅消费公开接口，调度按需调用服务；它们都不另建业务事实账。</p><p class="arch-meta">图、说明与可下载源文件：作者 Codex · 2026-10-24 · v0.1</p></section>
+</main><footer><div class="wrap">
+  <div>© 2026 Leviathan · 本页作者 Codex</div>
+  <div>public version · sanitized · src 59e7d6c · <a href="feed.xml">rss</a></div>
+</div></footer>
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(list){
+    list.forEach(function(entry){ if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.05});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+%% 作者：Codex | 2026-10-24 | v0.1 边界草图
+%% 源码核对 + 目标边界；非实时健康图；实线不表示生产验收通过
+flowchart TB
+  subgraph layer0["消息与宿主能力"]
+    im["lev-im · 消息入口<br/>已有基础<br/>飞书收发 / debug 通道"]
+    router["lev-router · 路由<br/>源码候选<br/>策略 / 焦点 / 跨会话上下文"]
+    runtime["lev-core · 会话运行<br/>已有基础<br/>sessionRuntime / 取消"]
+    model["宿主 LLM · 可替换接入<br/>已有基础<br/>provider / model / 能力协商"]
+  end
+  subgraph layer1["角色任务与观察"]
+    presets["lev-presets · 角色<br/>已有基础<br/>chat / main"]
+    bus["lev-bus · 任务交接<br/>源码候选<br/>任务账 / 会话交接"]
+    schedule["定时与事件驱动<br/>当前暂停<br/>两套入口 / goal 另算"]
+    console["lev-console · 控制台<br/>已有基础<br/>状态 / 路由 / 任务 / 调度"]
+  end
+  subgraph layer2["事实与目标记忆"]
+    records["现有记忆与业务事实<br/>已有基础<br/>kb / journal / recall / IM 缓存"]
+    memory["lev-memory · 记忆<br/>规划 · 未部署<br/>sources / claims / episodes"]
+    contracts["公开 contracts · 契约<br/>规划 · 未部署<br/>共享协议 / 非消息处理节点"]
+  end
+  subgraph layer3["目标演进与恢复"]
+    evolution["lev-evolution · 进化<br/>规划 · 未部署<br/>候选 / 实验 / 独立验收"]
+    release["lev-release · 发行<br/>规划 · 未部署<br/>不可变组合 / 激活 / 回退"]
+    recovery["宿主外恢复底线<br/>已有基础<br/>启动 / STOP / known-good"]
+  end
+  im -- "入站 / 回复" --> router
+  router -- "选择会话" --> runtime
+  runtime -- "推理" --> model
+  runtime -- "角色配置" --> presets
+  runtime -- "任务交接" --> bus
+  schedule -- "脚本入口 · 暂停" --> bus
+  console -- "直接读文件" --> records
+  runtime -- "现有召回" --> records
+  records -. "整理与检索" .-> memory
+  router -. "按任务检索 / 上下文" .-> memory
+  memory -. "来源与经验" .-> evolution
+  evolution -. "独立验收后" .-> release
+  release -. "回退" .-> recovery
+  classDef planned stroke:#b3402a,stroke-dasharray:6 4,fill:#fffdf8
+  class memory,contracts,evolution,release planned

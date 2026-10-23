@@ -1,25 +1,1135 @@
 {
-  "generated": "2026-10-23T00:34:31.316550+00:00",
-  "source": "58e0e62",
+  "generated": "2026-10-23T17:21:29.680975+00:00",
+  "source": "59e7d6c",
   "items": [
     {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "pump 派工前先写 outbox/<job>.evidence.md，verificationRef 指向真实文件，不再用占位符；"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "consume 校验证据存在（任务工作区/工具工作区任一），占位符或编造路径 → evidence-missing；"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "补两项回归；全量 301 node 全过、11 bash 套件全过、回归 64 total / 0 fails；隔离整链重跑 PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离宿主 verify + 自动整链重新留原件（`outbox/chat-evolution-20261024-rework-isolation.md`），回归 JSON 66 项 / 0 fails。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "STATE/NEXT 正被另一会话（Codex）编辑（插件/记忆规划与模块图），本轮不抢这两个文件，避免覆盖对方在途改动；本目标状态以 `outbox/chat-evolution-20261024-rework-status.md` 与 task 账本为准。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "implemented 必须已有验收记录、accepted 必须 validated=true；验收不完整把 accepted 降回 proposed。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "回归 307 node、12 bash 套件、回归 62 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "LEV_REF_DIR 接入 references store，隔离实例写 var/isolation/refs；新增测试项。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "306 node 全过、12 bash、回归 62 过 0 失败；隔离整链 PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "尝试在隔离链里跑「资料→候选→任务」双链，发现资料存储未隔离（写仓库 var/lev-bus）且桩模型多轮调用产生 180 条噪声候选；已撤销该链、加深桩模型的工具结果判定，并新增 removeCandidate 维护接口清理。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "现状：资料/候选/任务联动仍由真实工具入口的单元回归覆盖（test_rework2_references 6 项）；隔离链只做任务自动执行与回投。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "305 node 全过、回归 62 过 0 失败、隔离整链 PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "coordinator 启动先 reconcileStuck：遗留 running → blocked（host-restarted），不自动重跑，再 drain queued。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "链脚本遇到宿主被回收导致 ingest 丢失时，重启并换 messageId 重试一次；连续 3 次 --full PASS，无端口残留。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "通知文本改 printf（修字面 \\n）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "305 node 全过、12 bash 套件全过、回归 62 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "LEV_IM_DATA_DIR 同时覆盖聊天日志与 debug outbox，隔离实例不再写仓库 var；链与宿主用同一数据根。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "通知成功写 marker，重试遇 marker 跳过（幂等）；pump-cli 显式 --task 默认只捞 queued，重跑需 --retry。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "provenance 支持目标 sessionId，只统计该会话，找不到 exit 2；整链传入本次 chat 的 sessionId。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新增 2 组回归；304 node 全过、12 bash 套件全过、回归 62 过 0 失败 4 人工；隔离整链 PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全部二轮反例重跑并留原件：native-outcome（error/aborted 不成功、completed 带文本 hostTurn、取消 prunes=1、超时 cancels=1）、actor-queued（actualPreset=main → resolvedRole=main）、references-r2（状态门禁、双向链接、阈值比较、URL 证据 pending、notes 根链接拒绝）、routing-r2（动态策略 s-B、语义 0 次、引用 dedupe 分离）、notify-http（notify_failed 而非 notified）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "顺手修 resolver 兼容：同步能定 preset 就同步返回（repro 与老调用方直接取 .role 也成立），必要时才异步查投影。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离宿主 verify + 自动整链 PASS（未手工调 pump，连跑 3 次），无端口残留。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全量：300 node、11 bash 套件、4 python、im-system 25 文件、回归 60 过 0 失败 4 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "交 `outbox/chat-evolution-20261024-rework-result.md`；task 保持 verifying，不自行 accepted。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "真缺陷 1：lev-bus cli 的 complete/unknown 没跟 LEV_TASK_DIR → 隔离里任务跑完却写回仓库账本、协调器空转 20 轮。已修。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "真缺陷 2：宿主重启后 queued 任务无人捞 → lev-core 启动补一次 coordinator.kick()，重启续跑。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "桩模型 /health 带 build，build 不匹配替换旧进程，避免旧进程占 5098 继续报错。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离整链连跑 3 次 PASS，无端口残留；300 node 全过、11 bash 套件全过、回归 60 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "references：状态更新也走门禁（read 要证据、accepted 要读过+证据、URL 证据 unverified）；验收阈值按 acceptance 条款实际比较，自然语言条款转 needs-human-review。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "工具层：candidate_link 传 taskStore（任务侧真写）；新增 candidate_verify 与 ref_by_task。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "notes 根符号链接直接拒绝。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "P2：策略热切换（policy 函数、contextLimit 每轮读）；dedupeKey 用本次入站 id、parentMessageId 保留被引用 id；rework-p1-4 改同步屏障 + 纳秒时间戳；隔离脚本 trap 清理。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全量 node 300 全过、11 bash 套件全过、回归 59 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "P1-B：coordinator.js + submit 入队触发，自动串行跑 pump；真实隔离宿主里没手工调 pump，任务自己推进到 verifying；4 项回归。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "P1-C：actor 改读真实 preset 投影（projcache / presetOf），async 化；隔离里 main 会话（无 IM 绑定）成功 deliver，chat 仍不能回投。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "P1-D：pump 通知看 HTTP/JSON 结果，失败入 notify-pending 下轮重试，不再无条件记 notified。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "P2 证据工具：provenance 逐 frame 解压（固定只解首帧的错误），默认只看最新会话。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全量 node 295 全过；隔离整链 PASS；回归 58 过 0 失败 4 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "二轮复核（`notes/reviews/chat-evolution-20261024-recheck.md）指出 6 项 P1 + P2；接单与顺序写进 outbox/chat-evolution-20261024-rework-status.md`。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "重写 turn-runner：机器来源与人类来源共用同一套 group/request/turn 关联与收尾；error/aborted 不算成功、completed 带真实文本与 hostTurn、执行中 isRunning=true、取消先 cancel+清队列再收尾（pruned 可读）、超时真取消。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "回归 5 项（tests/test_rework2_native_runner.mjs）；验收反例 repro-native-outcome.mjs 五项全部符合；真实隔离宿主 `POST /api/lev-core/run {source:{kind:schedule}}` 返回 ok:true + hostTurn + 文本。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全量 node 套件 291 全过；隔离 verify PASS；回归 58 过 0 失败 4 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：P1-B 自动执行入口（不得人工调 pump）+ P1-C 身份投影。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "不只跑回归清单：node 286 项、bash 11 套件、python 4 个、im-system 25 文件、memory 0/0、预设最新、parity PASS，全绿。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "原件落 `outbox/chat-evolution-20261023-rework-suites.md`，报告补「全量套件」一节。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "返工范围内没有红/跳过项；剩余是真人/生产窗口边界（真实 provider、浏览器 UI、生产激活、候选→任务真实链）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "真实宿主里 @deepseek-ai/dsh-llm 解析不到，官方 createUserMessage 不可用 → 原生注入原本会失败。加「同形状」本地工厂（role=user + 原生 source.kind，深冻结、带 id），隔离宿主里 `POST /api/lev-core/run {source:{kind:schedule}}` 现在真的跑完并返回 native:true。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新增 scripts/isolation-provenance.mjs：解压真实会话日志统计来源 kind，读到 schedule/runtime-context，证明来源被协议记录（不只在 API 层）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "整链 --full 并入溯源检查；新增回归用例；回归 57 过 0 失败 4 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "边界未变：UI 呈现仍需浏览器验证；模型是桩；生产未激活。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "补了 context.source 兼容：旧调用方把来源放在 context 里也不会被当成人类输入。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "证据落盘：rework-result.md（逐项 症状→修法→证据→边界）、rework-regression.json（60 项 56/0/4）、rework-isolation.log（隔离 verify + 整链 PASS，连续 3 次）、rework-repros.log。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "任务保持 verifying，等独立复核；残余边界如实列出（桩模型、UI 溯源、生产激活、候选→任务真实链）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：若复核无新问题，转入「等待人类激活」的收尾（不改 task 状态、不重启 5090）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lev-core /api/lev-core/status 暴露主会话 goal 状态（phase/goalId/roundsStarted/activation/armed），读不到返回 null。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lib.sh lev_goal_busy + turn.sh：goal active+armed 时 timer/inbox/task-result/watchdog 唤醒让路并记 turn_goal_owner_active；manual/recovery 可强唤醒；LEV_GOAL_YIELD=0 可关。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "验证 5 项（含「读不到状态照常唤醒」），变异验证去掉判断会红；回归 56 过 0 失败 4 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "边界：goal 续轮在宿主进程内发起，仓库拦不到；让路的是外部唤醒，这正是验收要的那一半。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "engine 把检索/跨会话背景合成机器资料块，优先经 turn-runner.inject()（resolveAgent + createUserMessage(runtime-context) + agent.send 不唤醒）注入；没有注入器才降级到人类 prompt 文本并留日志。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lev-im 暴露 injectContext，并统一共享 runner（原来两个实例）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新用例 2 项（有/无注入器两条路径），变异验证：强行拼回 prompt 会红；隔离整链改动后重跑 PASS；回归 55 过 0 失败 4 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：写 rework-result（逐项证据 + 剩余边界），并核对验收报告每一项是否都有对应用例。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "沙箱会回收后台宿主，链路里改为「泵前探测，死了就重启」；状态都在磁盘上，所以可续。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "边界：模型是桩；真实 provider 推理质量下的整链要等生产激活后另验。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "任务执行链不依赖模型，第 4 轮桩宿主已验证；工具契约由第 8 轮真实宿主激活 + contract 用例保证。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：本地 OpenAI 兼容桩模型接到隔离 profile，跑通模型回复与一次工具调用（提交任务），把整链补全。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "scripts/isolation-host.sh：临时 DSH_HOME + 5099 端口，verify 一次调用内启动→鉴权→探测→停止；stop 只杀自己 pidfile 且校验端口。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离宿主发现真 bug：lev-core 激活失败，`tool \"lev_task_submit\" must declare output { schema, render }；10 个新工具全缺 output 契约，整插件加载不了。补契约 + 新增 test_tool_output_contract.mjs`，变异验证会红。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "现在 verify：lev-* 全部激活，/api/lev-core/status 与 /api/lev-console/timers 均 200，PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "环境噪音：隔离 profile 的 bilibili 插件依赖缺失 import 失败（与我们代码无关，正式 profile 未动）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "门禁判结果：指标必须 before/after/出处、按方向判好坏、变差即不通过、证据须真实存在；validated 不能手设。用新门禁重判真实候选，回归集候选诚实回到 validated=false（缺前后测量对）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "资料链：RSI 补真实 URL+证据；三资料补适用方向；四候选补 sourceIds；纠正 DeepSeek-Bot 归因。kb/references.md/kb/acceptance.md 重新生成。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "筛选：路径型目标须在授权根内；任务库坏即停。selfdev 零候选/出错不投卡（selfdev_skip），不再拿泛 AGENDA 糊。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "红→绿 7 项（6 项修复前红），旧用例按更严契约同步更新；回归 52 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "turn-runner 分两条路：真人类 → controller.prompt（记为人类输入）；机器来源 → resolveAgent + createUserMessage(source) + agent.send('next-turn', true) + whenIdle。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "宿主没暴露 createUserMessage 时返回 native-inject-unavailable，不退回 user-rpc —— 不把机器指令伪装成人说的。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "/api/lev-core/run 接受 {source:{kind}}（机器来源白名单）；turn.sh 按唤醒来源映射 schedule/agent-message/cordis-host-runner/goal。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "验证 4 项新用例 + 既有 turn-runner 5 项 + turn 输入 8 项；回归 50 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "engine 普通接续改为调用真实 router.target（targetCalls 从 0 变 1），实际 prompt 交给最后回复会话；显式议题仍优先。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lev-im 启动读真实策略传给 decider：last-reply 下语义模型调用 0 次；Python 账本接纳 last-reply（展示保留配置名）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "通知判据补 notificationId（真实出站形状），后台通知不再抢下一轮焦点。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "P2：dedupeKey 用 parentMessageId；contextMessages 生效（1 条就 1 条）；渲染保留 from=<session> id=<messageId>；首条超长截断到上限内（5032→1196）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "红→绿 4 项（真实 apply→engine→decider→router→账本），变异两处各红 1 项；既有 IM 套件 38 项过；回归 50 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：P1-6 原生非人类上下文注入；P1-8/P1-9 验收门禁与真实资料链。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lev-core 的 apply 现在注册 16 个工具（任务 5 + 资料/候选 5）；身份由 actor.js 从 exec.agent.id + IM 绑定解析，参数不能伪造；chat 不能处置/回投，main 受验收证据门禁。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "红→绿：catalog 5 项 + pump 5 项；变异验证两个方向（去掉注册 → 3 红；泵不释放锁 → 1 红）。回归 49 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：P1-2/P1-3 IM 实际 last-reply 与通知判据。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lev_task_submit：身份只信 resolveActor，参数 source.sessionId/chatId 不再能伪造聊天；无 chatId 的非 main 身份 consume/cancel 直接拒绝（缺失身份不放宽权限）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "三态分开：deliver 必须带 verificationRef，consume 要求结果文件 + 验收证据；旧 test_task_tools.mjs 按新硬规则补齐证据参数（不是放宽）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "红→绿 6 项，变异验证两次都会红；相关套件 25 项全过，回归 46 过 0 失败。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "下一轮：P1-1 工具接线与执行回投，以及 goal 协调键（需 lev-core 暴露 goal 阶段）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "turn.sh：lev_human_mark_seen 从 trigger 分支里解耦——成功且期间没来新人类消息就标 seen（只有 human-msg 没有 trigger 也不会反复唤醒）；轮次开始记 human-msg 时间戳，成功时变了就记 human_msg_newer 留给下一轮，不误消费新消息；失败照旧不标。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "**未完成（如实）**：goal 自动续轮在宿主进程里，仓库改不到它的调度入口；goal 与外部入口共用协调键 还需要 lev-core 在宿主侧暴露 goal 阶段、turn.sh 据此跳过。列入下一轮。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "回归 46 过 0 失败（新增 rework-p1-4 后）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "独立验收未通过（报告 `notes/reviews/chat-evolution-20261023-acceptance.md、复现 outbox/acceptance-20261023/）。接单回执与修复顺序写进 outbox/chat-evolution-20261023-rework-status.md`；taskId 沿用，状态保持 verifying。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "**P1-7 先修**：两个 store 原来「主库 rename 成 .bak → 临时文件 rename 成主库」，中间有主库缺失窗口；read 遇到 missing 就当空库 → 崩溃后静默丢数据。现在共享 atomic-json.js：主库永不消失（先写 tmp、复制备份、最后原子替换）；缺主库但有 .bak 就恢复并标 recovered；坏文件报错不覆盖；跨实例一致性改成读前重读盘（mtime 同毫秒不可靠，弃用判变）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "先写 tests/test_store_crash_safety.mjs（5 项，修复前 3 红），修完全绿；原验收复现脚本现在输出 `['original-must-survive','new-after-restart']`，原始数据活着。既有相关套件 39 项仍过；回归 45 过 0 失败 3 人工。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "边界守住：没重启 5090、没恢复 timer、没发 IM、没碰无关文件。下一轮 P1-4（重复唤醒/重复执行）。"
+    },
+    {
       "date": "2026-10-23",
-      "title": "主动性复盘（3 天到点，命中率 0%）",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "人类问「为什么这么多定时器唤醒」，Codex 只读核实后交接了一张诊断卡。核实：timer/watchdog 大多是空检查（当天 78 次 no_work 跳过，不写会话）；22 条唤醒模板来自同一个持久 main session；同一天 Codex 手动启动的两轮也被 prompts/turn.md 的写死话术误标成 systemd 唤醒；建 goal 后 goal 自动续轮与外部 turn 唤醒叠加，而 turn.lock 只覆盖外部 turn，不覆盖 goal 续轮。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "处理：证据存 `notes/findings/wakeup-coordination-20261023.md`，计划新增 2.6「唤醒来源协调」（有 owner 的 goal/任务只做廉价检查、同一协调键、记录真实 source/reason/taskId、不误判活动 goal 无活、不强行恢复暂停/预算受限的 goal；先隔离测试，不动正式 timer、不重启 5090）。本轮不顺手实现，避免和 2.3 混在一起。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "卡已归档 inbox/.done/。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "收尾时发现 test_task_store.mjs 的跨进程锁用例是** flaky**：原来固定 sleep(150ms) 等子进程拿锁，负载一高就把「还没拿到锁」当成「拿到了」，连跑两次任务存储+工具测试时出现过一次 fail。改成子进程拿到锁后写 marker 文件、父进程轮询 marker（5s 上限），再连跑 5 次全绿。教训同 kb/lessons.md 那条：**测试不要用固定 sleep 猜并发时序**。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "人类要求：唤醒提示应该用「上下文注入」块，而不是用户块；只有人类的消息用人类块。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "核实（读已装 DSH 0.2.1-rc.2 源码）：我们的唤醒/回投/检索都走 sessionController.prompt，它固定 createUserMessage + source.kind='user-rpc'——所以看起来就是人类发言。DSH 原生早有非 user 来源：schedule（定时提醒）、cordis-host-runner（运行器回报）、goal（续轮），做法都是「user-role 消息 + 非 user 的 source.kind」，UI 可区分，**不用改 wire role、不用打上游补丁**。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未改代码、未重启 5090；等 Codex 补充原生路径后开工，不阻塞 2.4。卡已归档。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "outbox/chat-evolution-20261023-result.md：按阶段列交付与证据、真实验到的命令与数字（regression 44/0/3 人工、test-im-system 25 文件、memory 0/0、parity PASS、single-writer 4 项）、未完成 5 条、回滚点、正式激活 5 步、复核者最小验证路径。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "任务状态 running → verifying（不是 accepted）：5090 未重启、策略仍 sticky、7 个 timer 与 DSH schedule 仍停用——生产没激活就不算验收通过。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "NEXT 里本目标的可跑项已收掉，不再有 - [ ]；只剩 [H] 本目标正式激活（等人类给窗口）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "本任务区间 154db04..HEAD：26 个提交、73 个文件、21 个测试文件、19 个插件文件。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "目标侧：实现部分到此为止，后续只有人类授权后的激活与线上观察。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "5.2：tests/test_single_writer.mjs 静态约束四个写者边界（deliveries/任务账/资料账/飞书 HTTP），变异探针立刻被抓到 file:line。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "5.3：恢复能力保留——7 个 timer 单元文件在、wants 链接记入证据；定时器仍按人类要求停用，本任务不恢复。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "5.4：`outbox/chat-evolution-20261023-verification.json` 记 8 条命令 rc=0（regression 44/0/3 人工、test-im-system 25 文件、memory 0/0、预设最新、parity PASS、single-writer 4 项、树干净）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未激活部分单列：5090 未重启、策略仍 sticky、timer/schedule 仍停用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：5.5 交付报告 result.md。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "recordVerification()：假设/改前/改后证据/独立对照样本/副作用/行为指标缺一不可，缺了就把 validated 降回 false；**只有计数指标直接判不合格**；对照样本与调试样本重叠也不合格。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "新增 kb/acceptance.md（带缺口列）与 CLI cand-verify / acceptance-index；真实回填「回归集回放」一条（对照 1、证据 3、行为指标 2、副作用 1）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：references store 12 项（含新增 3）+ acceptance CLI 5 项；回归 43 过 0 失败 3 人工。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "如实：deferred/rejected 两条候选没有矩阵，表里写「缺」而不是编数据。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：5.2 写者收口 + 5.4 完整回归，然后出 result 报告。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "资料 3 条全部读过并写了处置：RSI 综述 accepted、Codex 原生接口核对 accepted（已排进 2.7）、DeepSeek-Bot rejected（只借鉴教训）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "候选 3 条：回归集回放 implemented+validated（证据 regression/cases.json + regression-check.py + 44 条用例）、记忆效用 deferred（要动 lev-core，属 [H]）、引入 DeepSeek-Bot rejected（无收益）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "kb/references.md 用真实条目生成，重复生成幂等；索引头部写明 readState/disposition/validated 是三件事。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：索引一致性 4 项；回归 42 过 0 失败 3 人工。没有编造实验数据；三条候选暂无可关联任务，如实记下。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "阶段 4 收口。下一轮：阶段 5.1 验收矩阵（不拿提交数/测试数当进步）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "selection.js：按 AGENDA 相关度 / 已采纳 / 关联任务在跑 / 验收条数排序；无验收、关联任务被阻塞（待决项，不挡其它）、已验收的都跳过；无候选 hasWork=false 不造卡。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "select-cli.js + selfdev-wake.sh：有候选才写「资料池挑出的候选」块（带验收与任务），没有就退回 AGENDA 自由挑；跳过原因记日志。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证 6+5 项全过，回归 41 过 0 失败 3 人工。踩坑两次都是调用方式：CLI 在 lib/ 下、直接执行缺 x 位、测试仓库没带 plugins/ 导致静默空。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未做：4.4 真实回填；线上未动、定时器仍停用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：4.4 回填 + 一条真材料消化 + 生成 kb/references.md。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "writeIndex() 原子落盘 kb/references.md（标注自动生成；readState/disposition/validated 三件事分开说明）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "CLI 加七个命令（ref-add/ref-state/cand-add/cand-status/cand-link/ref-index/ref-import-park），采纳要理由、validated 要证据在命令行层也拦。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：store 9 项 + CLI 6 项全过，回归 39 过 0 失败 3 人工。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未做：接进 selfdev-wake（4.3）；真仓库 kb 索引还没生成（等真实资料，不造假）；线上未动、定时器仍停用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：4.3 自迭代挑候选 + 4.4 真实回填。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "plugins/lev-bus/lib/references.js：references/candidates 两个 JSON，O_EXCL 锁 + 原子替换 + .bak；读（readState）、处置（disposition）、验证（validated）三态分开，采纳/拒绝/暂缓必须带理由，validated 必须带证据——防止「收录=消化」「采纳=有效」。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "幂等与容错：URL 归一化后同 URL 幂等且只补空字段；坏 JSON 报错不覆盖；空库可跑；renderIndex() 产出 kb 索引文本，importParkRows() 兼容 park 队列。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证 6 项全过，回归 38 过 0 失败 3 人工。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未做：lev-core 工具入口与 kb 落盘（4.2）；线上未动，定时器仍停用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：4.2 候选↔任务↔验收双向关联 + 索引落盘。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "新增 presets/route-policy.template.json（默认 last-reply，附激活/回滚 6 步）；scripts/route-policy.sh 加 template [--check] / activate --yes / rollback，set 支持 last-reply 与 last-active 别名。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "关键约束都写进用例：模板不自动上线、缺 --yes 拒绝且不写、重复 activate 幂等、rollback 回 sticky、回切后 --check 报差异、未知策略拒绝且不改坏运行时。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "真仓库验证：运行时仍 sticky，template --check 返回 1（有差异）——证明没有偷切。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "回归 37 过 0 失败 3 人工。阶段 3 到此收口；线上激活（web 重载 + 策略切换）仍列在 [H] 清单。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：阶段 4.1 资料/候选记录模块。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "route-ledger.py receipt 透传 dedupeKey（以前丢掉，重复回执会多写行）；engine.js 用「入站 messageId > 通知 id > 本次随机」生成稳定 dedupeKey。第一版用 chatId:messageId:块，通知没有 messageId 时全撞成 local，test-im-system.sh 当场抓出两条通知只记一条账——改成三级身份后全绿。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "sent≠已读：acked 只在有回读回执时写 read；failed/unknown 不会写成 sent。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "两本账：trace 加 ledger:'im'；控制台新增 taskLedger（file/count/verifying/unacked），和 IM 出站账分开展示。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：receipt 5 项 + 控制台分账 1 项 + 引擎 dedupeKey 1 项；test-im-system.sh 全绿；回归 36 过 0 失败 3 人工。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：3.5 配置模板默认简单策略 + 激活清单（不自动切线上）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "新增 lib/context-log.js：按聊天 JSONL 追加（入站 human / 出站 agent，带 sessionId/messageId/ts/text），尾部有界读、坏行跳过。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "engine.js：入站记一条、成功出站记一条（失败/未知不记）；prompt 加入「历史上下文·仅作资料」块，排除当前输入。index.js 注入 recordTurn/loadTurns，不注入时行为不变。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：上下文 6 项 + 接线 2 项新用例，既有 lev-im 30 项仍过；回归 35 过 0 失败 3 人工。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未做：3.4 回执/两本账；线上未加载；定时器仍停用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：3.4（真实回执更新 router，sent≠已读，两本账分开）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "3.2：last-reply 补 isUsable（不可用会话跳过→回当前绑定）和 backgroundNotices（默认 false，通知不抢焦点，显式打开才参与）；策略用例升到 12 项。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "3.3：新增 plugins/lev-im/lib/context.js 的 buildRecentContext() —— 最近 N 条真实来回，逐条带 speaker/sessionId/messageId/time/direction，人类标 human，跨会话都在，排除当前输入，静默/通知/系统不算来回，超长从最早丢并标 truncated，前缀写明「历史上下文·仅作资料」。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：策略 12 项 + 上下文 6 项全过，回归 34 过 0 失败 3 人工；check 0/0。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "如实：3.3 只是构建器，**还没接进 lev-im**，所以计划里 3.3 没勾；线上一行未动，定时器仍全部停用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：3.3 接线（入站/出站记录 + prompt 拼装）+ 3.4 回执更新 router。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "期间人类先停掉 7 个 timer + DSH schedule（notes/automation-pause-2026-10-23.md），随后允许只恢复本目标；本轮只在原生 goal 里继续，**没有碰定时器**，也没重复建 goal。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "收口暂停前在途的 3.1：plugins/lev-router/lib/policies/index.js 注册表（sticky / last-reply + last-active 别名 + 未知回落），service.target() 接账本，needsSemanticRoute(...,{policy}) 在 last-reply 下不再做后置语义改写。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：策略 10 项 + route integration 5 项全过，回归 33 过 0 失败 3 人工；memory-maint check 0/0。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未做：IM 普通接续还没真的切到 last-reply（3.2 接真实账本与绑定）；线上未动。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：3.2/3.3（真实账本接续 + 逐条来源上下文）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "wake-coordinator.js + CLI：一把 var/lev-bus/wake.lock 跨入口；owner 活跃时 timer/watchdog 只记 turn_wake_skipped 并跳过，manual/recovery 可并发但记 turn_wake_concurrent；陈旧 30 分钟可接管；release 只删自己的锁。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "turn.sh：记录真实来源（timer/inbox/task-result/环境变量），turn start 带 source=，退出释放锁（trap 兜底）。跳过路径不动输入，也不删别人的锁。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：协调器 6 项 + turn.sh 隔离用例 2 项全过；接进回归（32 过 0 失败 3 人工）。期间真实踩坑：隔离仓库没带 plugins/lev-bus，CLI 静默失败导致协调没生效——补进测试夹具。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "**如实**：goal 续轮驱动在宿主进程里，仓库改不到；只能让它看见锁就知有人在跑，真实覆盖度待观测。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "阶段 2 收口（2.1→2.6）。仍未激活到线上（需 web 重载）。下一轮进阶段 3.1 路由策略注册表。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "turn.sh：起跑不再直接删 trigger，而是挪成 trigger.consumed；rc=0 且无 急停开关 才删并 lev_human_mark_seen；失败/急停开关 还回去并记 input_restored / input_kept。原来「起跑就删」意味着一次失败就把唤醒永久吃掉。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "lib.sh：lev_hard_work 增加 lev_unconsumed_results——verifying 且没有 consumedAt 的任务也算硬活，回投结果不会没人接。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证 6 项（成功消费/失败还回/急停开关 保留/未消费唤醒/已消费不唤醒/日志），变异验证过（改回「起跑就删」→ 3 项红）；已进回归（31 过 0 失败 3 人工）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "未做到：进行中的模型回合不能被 急停开关 中途打断（宿主能力），重启恢复靠 task-store 持久化、没做真演练。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：2.6 唤醒来源协调（外部轮询与 goal 续轮用同一把协调键，记录 source/reason/taskId）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证 5 项 + 按实际调用顺序模拟 link→complete→complete（第二次 duplicate），已进回归（30 过 0 失败 3 人工）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "踩到两个状态机细节：blocked/failed 不能直接进 running（要先回 queued），以及 markUnknown 对已记过的 job 要幂等——都补了用例。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：2.5 失败续接（成功才消费 trigger、未消费结果唤醒、急停开关 覆盖进行中任务）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "补充：Codex 的 6.1-sol 只读核对到了（`notes/dsh-native-context-wakeup-2026-10-23.md），结论比我自己的核实更细：sessionController.prompt() 强制 source.kind='user'；正解是 sessionController.resolveAgent(sessionId) → agent.send(createUserMessage({source:{kind:'lev-turn-wakeup', form:'notice', summary≤120, taskId, eventId}}), 'next-turn', true)（等价 agent.followup）；inject 不唤醒、send/steer 只代表接纳；UI 原生把非 user 来源渲染成 kind=context 的上下文块。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "把 lev-im 的 turn-runner 抽到 plugins/lev-bus/lib/turn-runner.js 作单一实现，lev-im 侧改成再导出（不新增第三套）；lev-core 的 promptAndWait 从「同 session 猜 turn」改为调用同一 runner。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "保住的语义：timeout 仍映射 504；同会话第二次调用仍 absorbed；只有 rpcId 关联上的那个 turn/end 且 reason.kind === 'completed' 才算成功。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "契约测试 5 项全过（接受≠完成 / 无关 turn 不结束 / 非 completed 不算成功 / 二次调用 absorbed / prompt 被拒即失败），变异验证：破坏 rpcId 关联 → 4 项红。已接进回归（29 过 0 失败 3 人工）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "边界如实：lev-core 改动要 web 重载才生效（宿主插件），lev-im 行为不变；生产激活仍按清单。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "plugins/lev-bus/lib/tools.js：五个工具 + 注入式角色解析（resolveActor(exec)）。规则：聊天能提交/查询自己范围/确认/取消自己的；主脑专门回投；跨聊天确认或取消一律拒；工作区越界拒；没有角色一律拒。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "状态机不跳级：deliver 对排队中的任务先合法记 running 再进 verifying；重复回投报 illegal-transition，避免同一结果被交付两次。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证 tests/test_task_tools.mjs 8 项全过，已接回归（task-tools，28 过 0 失败 3 人工）；变异验证：删掉 deliver 的角色守卫 → 「聊天角色不能回投」立刻红。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "**边界如实**：只记账与校验，真正发飞书仍归 lev-im；生产 actor 解析（sessionProjections）还没接，所以真实聊天暂时跑不到这条路。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：2.3 统一执行契约（复用 turn-runner 的 requestId→rpcId→turn，替换 lev-core 猜 turn）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "新增 plugins/lev-bus/lib/task-store.js：tmp+fsync+rename 原子写、.bak 回退；8 状态迁移表（终态封死、running→running 记重试、failed→queued 可重排且不清零 attempt）；idempotencyKey 去重（重复送达返回原任务，不改写）；retireSource() 只给来源盖 sessionRetiredAt，任务与回投指针保留；O_EXCL 锁文件 + 陈旧判龄 + 超时，持锁前重新读盘。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "坏库处理是这次特意写的：文件坏/读不了就抛 store-malformed / store-unreadable，**不改写、不当空库**——上次台账覆盖丢数据的教训。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证 tests/test_task_store.mjs 8 项，含**真跨进程**锁用例（子进程持锁期间父进程必须超时）与「原子写不留 tmp」；已接进回归（task-store，27 过 0 失败 3 人工）。变异验证：withLock 改成直接执行 → 两条锁用例立刻红。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：2.2 工具层（提交/查询/回投/确认消费/取消 + 角色与范围校验）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "先写边界回归再改实现：tests/test_role_boundary.py 查生成物（chat 预设无 shell、tool-fs 只读、headless-chat 显式 disabled），tests/test_lev_note.mjs 查有界写入工具的行为。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：边界与工具行为用例全过并接进回归（role-boundary，26 过 0 失败）；变异验证——删掉 disabled: true 那行，用例立刻红。parity 探针模式 PASS。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "下一轮：阶段 2.1 任务存储（原子持久化 + 状态机 + 幂等键）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "**1.1**：PREFERENCES.md 的「及时回复」改写成「**回一句 ≠ 请许可**」——回「收到」只表示话没丢；已有授权（NEXT - [ ]、拍板方向、任务卡）范围内直接做完再报，越界或新增授权才问。main.mode.md 红线行同步：「已授权目标范围内不再重复请示」。改前守 1400 units 上限：顺手压缩了 IM 插件归属与长期例外两段（内容不丢），变更记录写了原因。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "回归：改动前后各跑一次 regression-check.py，25 过 / 0 失败 / 3 人工；memory-maint check 0/0。没重启 5090、没动正式 profile、没发 IM。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "**没验的**：真实聊天里「让它修系统配置会不会真去派发」要等阶段 2 的交接链路，目前只证到规则与生成物一致。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "人类经 Codex 交接：**“你写好规划，让主脑自己做一下”**，授权主脑按 `notes/plans/2026-10-23-chat-driven-evolution.md（快照 4410e84`）执行，不再重复问「要不要做」。红线不变：5090 不停不重启、不发真实 IM、不对外发布、不清历史。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "阶段 0（基线 + 接单）已收口：接单回执 outbox/chat-evolution-20261023-status.md、机器可读基线 `outbox/chat-evolution-20261023-baseline.json（HEAD 7beb8eb、树干净、main session 记录在案）、任务状态 「运行日志」（原子写，running/stage 0`）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "基线数字：regression-check.py --json **28 项 0 失败 3 人工**（人工项是既有的三条探针，不是本轮新失败）；memory-maint check 0 超限 0 警告。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "NEXT 里本目标只留一个可跑项「阶段 0→1」（委托方已经写好，我没重复加）；正式激活单列 [H] 并带上 taskId；卡片已归档 inbox/.done/。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "没做的事：没有开始阶段 1 的规则/预设改动——那要先跑规则回归、按编辑预算逐条留原因，放到下一轮开头做更稳。也没碰 5090、没发 IM、没动别人的在途文件。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "问题：route-ledger.py 已经区分「动作句 vs 纯历史」，但 plugins/lev-im/lib/routing.js 拿到 Python 的 current 后，自己又用一份历史词正则把它改回 recall——「上次那个方案换成绿色」在 JS 层又被降级成只读回忆。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "改法：JS 侧加 ACTION_WORDS + wantsAction()，降级条件补上 !wantsAction(text)；两层词表由回归用例强制一致（只改一层会红）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：tests/test_route_integration.mjs 追加两条（词表对齐、动作句不降级），5 项全过；**变异验证**：把 JS 守卫删掉后该用例立刻 FAIL（第一次写测试时目标选错了聊天——有议题关键词会先走 attach，根本到不了 JS 降级那段；改成无议题聊天才真正覆盖）。已接进回归集（route-cross-layer）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "顾问这份报告 P0/P1 都收口了；暂缓项（lev-bus、批量插件化、新召回算法）维持原判。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "顾问（19:00 自动跑）点名我上一轮修的台账**还会丢数据**：evaluate 是「load→改→save」，另一个进程 add 追加的新行会在 save 时被整份覆盖；我上一轮的原子替换只防写坏，不防交错。判断正确，实测确认读代码逻辑成立。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "改法：scripts/proactive-log.py 加 ledger_lock()（锁文件 + fcntl.flock，非阻塞重试 + 超时），包住 evaluate / close-stale 的整段读-改-写，add 也持锁；close-stale 拆出纯函数 _close_stale_rows 便于持锁调用。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验收（新 tests/test_proactive_ledger.py，4 条）：① 别人持锁时 add 必须等待（计时断言）；② 边 evaluate 边 add 15 条，一条不丢、无重复；③ 顺序 evaluate/add 历史完整；④ 账本读不了要报错不能当空。**反向验证**：把 ledger_lock 换成空实现后，① 立刻 FAIL——说明这条用例真能抓住回归，不是摆设。已接进回归集（proactive-ledger-tests，24 过 0 失败）。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "顾问 P1（跨层路由）属实：plugins/lev-im/lib/routing.js:135 有一份自己的历史词正则，会把 Python 判的 current 改回 recall。已写成 NEXT - [ ]（复用同一判据 + 跨层回归），本轮不顺手改，避免一次推两件。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "暂缓：lev-bus、批量插件化、新召回算法——理由同意，状态和裁决没定就加通道只会扩大故障面。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "kb/lessons.md 的并发结论已改严谨（flock 挡交错 ≠ 原子替换），顾问报告状态回填「部分采纳」。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "跑 proactive-log.py stats 时发现账本只剩 1 条（今天 16:32 那条问 digest 的），昨天复盘过的 3 条（10-21 08:39、10-22 03:31、10-22 08:33）不见了。var/ 不在 git 里，没有备份可还原；现存那条只写着「后台消息还是会弹进聊天窗，要不要改成只进 digest」，正好是 [H] IM 单口 vs 多流 在问的事。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "根因（读代码）：add 和 evaluate 都是「读全份 → 全量重写」，两个进程（主动搭话脚本 / 别的会话）交叉执行就会互相覆盖；load() 遇到坏行还会直接抛异常，重写路径更脆。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "改法：① add 改成 O_APPEND + fsync 追加，不重写整份；② evaluate/close-stale 走 save()：先写临时文件 + fsync + os.replace 原子替换，并留一份 ledger.jsonl.bak；③ load() 单行坏了只跳过该行（stderr 提示），文件存在但读不了则抛 LedgerUnreadable，宁可不写也不当成空账本。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "验证：临时 root 上跑 add×3 → evaluate（行数不变、.bak 生成）→ 塞一行坏 JSON → stats 仍读到 3 条 → 再 add 变 5 行，全部符合预期。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "没做：没有伪造那 3 条已丢记录（时间/id 只能靠回忆补，补了就是编数据）。教训写进 kb/lessons.md。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "boot 两个告警：① 预设过期（PREFERENCES 在 00:43 CST 加了「IM 发图必须真发」，生成物没跟上）；② notes/review-im-console-2026-10-22.md 2184 units 超过 notes 上限 1600。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "笔记：把「做对的部分」「缺陷清单」两节原文拆到 notes/im-console-defects-2026-10-22.md（801 units），主文留汇总与指针（1549 units）；check 回到 0 超限 0 警告。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
+      "text": "没做的：没有重装 bundle（宿主插件/预设靠 HMR 或下次重启生效，本轮只保证磁盘与测试）；[H] 主动搭话频率仍等你选。"
+    },
+    {
+      "date": "2026-10-23",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
       "text": "**判定**：命中率 0/（0+1 自动收口）= 0%，远低于 30% 阈值。三条都是「你觉得怎么样」式审美主观题——从 IM 入站记录看，人类当天确实在聊天（10-21 16:14Z 一串短消息），但没接这些话题。"
     },
     {
       "date": "2026-10-23",
-      "title": "主动性复盘（3 天到点，命中率 0%）",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
       "text": "**已改（不需要人类拍板的部分）**："
     },
     {
       "date": "2026-10-23",
-      "title": "主动性复盘（3 天到点，命中率 0%）",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
       "text": "**【需要人类】** 频率是否从 2 条/天降到 1 条/天（或干脆停到 M1）——这是 PREFERENCES.md 里你定的规则，我不擅自改，已写进 NEXT [H] 三选项。"
     },
     {
       "date": "2026-10-23",
-      "title": "主动性复盘（3 天到点，命中率 0%）",
+      "title": "收卡：唤醒来源没有协调（chat-evolution 补充证据）",
       "text": "结论同步进 AGENDA.md E 方向（与人的协作界面）。"
     },
     {
@@ -656,6 +1766,26 @@
       "date": "2026-10-19",
       "title": "骨架、主脑、飞书与站点上线",
       "text": "**Codex / Cursor 的 IM 与控制台改动复核（主脑，深夜）**：仓库 main@6ea4005 干净，重跑 node 108 / python 43 / shell 20 / 回归 18 过 0 失败；隔离阶段 79 项与真实 Chrome 证据在。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**消息路由架构图（09:40 CST）**：人类说路由「还是有点奇怪」，先要图。出了 notes/im-routing-arch.svg / .png（生成器 notes/im-routing-arch.py，渲染 notes/im-routing-arch-render.mjs），拆解写 notes/im-routing-2026-10-23-arch.md。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**IM 出站渲染对齐 dsh-im（09:55 CST，人类反馈）**：人类说「1 是看不到图，相比之前的 dsh-im 插件还缺 markdown 渲染，建议抄一抄」。查上游 @michengai/dsh-im-connect@1.0.7 的 lib/channels/feishu.js：普通回复走 interactive 卡片 + schema 2.0 + body.elements[markdown]，按「每卡最多 5 张表」拆卡；卡片被拒退纯文本，限流直接抛给上层退避。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**路由策略层（12:3x CST，人类要求「策略应该可更换」）**：把「没有明确信号时接谁」从写死的兜底里拿出来做成策略。route-ledger.py 新增 route_policy(root)（读 「运行日志」，LEV_ROUTE_POLICY 可覆盖）、_last_active_session（只认本聊天 via=lev-im 的 sent 交付，脚本/后台的 im-send 不算）、_recent_session_rows；"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**路由系统插件化第一步（12:5x CST，人类：「整个消息接收并路由系统应该做成 dsh 插件」）**：现状是接收在 lev-im 插件、路由却在 scripts/route-ledger.py，每条消息起 4~8 个 Python 子进程（单次 25~40ms），账本靠 .lock 跨进程互斥，插件、im-send.sh、lev-core 的 lev_route、控制台各走各的。"
     }
   ]
 }
