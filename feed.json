@@ -1,7 +1,77 @@
 {
-  "generated": "2026-10-23T17:21:29.680975+00:00",
-  "source": "59e7d6c",
+  "generated": "2026-10-25T07:24:09.686420+00:00",
+  "source": "1d2d517",
   "items": [
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "imSendTool 消费 core routerBackend，先观察并固定 native；service 注销/替换/异常不再回落旧脚本；chmod trap 与 packed 故障覆盖。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "407 node、回归 90/0/4；交 d-final-result，正式未切换。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "lev_im_send/proactive 候选走公开 IM service/HTTP；旧脚本 trap 0；packed 工具实际跑通。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "snapshot 复用共享 coverage；坏 schema/首启缺文件/陈旧锁显式 degraded/missing/unwritable；console 显示并截图筛选/media/coverage/lock。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "全量 405、回归 90/0/4；交 d-followup-result。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "router snapshot 公开只读，console 经 Cordis router 能力消费，缺服务 503，不再直读 var/route；坏账/缺文件/锁状态可见。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "恢复演练旧 Python 账→native 新事实→切回 Python 读取；切换操作包写好未执行；正式 5090/profile/账/策略/timers 未动。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "reconcileRows 区分缺能力/查询失败/malformed 与空结果；媒体和文本路径都拒绝且外发 0，账不变。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "恢复后 sent 复用/unknown 阻断/failed 补发/empty 首发保持；public send 坏账不发送。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "全量 394 node、回归 86/0/4；隔离 native 链 PASS。交 c2b-final-result，D 未开始。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "正式入口恢复旧实现，HTTP 客户端移 im-send-http/route-policy-http；不自动 fallback，正式 route-policy get 只读通过。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "媒体 intent 持久化 uploadId/digest/kind，digest 真发媒体；空回执/丢 ACK/坏引用不假 sent，unknown 不重发、failed 可补发；duplicate 看实时 coverage；staging 可配。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "CLI 校验 HTTP/ok/state/sent/引用；隔离 native 链文本/图片/文件/长文/dry-run/冲突/上传边界全过；全量 392、回归 86/0/4。"
+    },
+    {
+      "date": "2026-10-25",
+      "title": "路由 D 最终：发送服务注销补齐",
+      "text": "交 c2b-followup-result，D 未开始。"
+    },
     {
       "date": "2026-10-24",
       "title": "二轮返工 6：证据真实性收口",
@@ -16,6 +86,306 @@
       "date": "2026-10-24",
       "title": "二轮返工 6：证据真实性收口",
       "text": "补两项回归；全量 301 node 全过、11 bash 套件全过、回归 64 total / 0 fails；隔离整链重跑 PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "lev-im 新增受控 staging 上传与媒体发送，沿用 notify→claim→deliver→settle；feishu/debug/engine 媒体能力；route-policy 与 proactive 走 HTTP。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "旧直连移入 tests/fixtures/legacy 仅回归；正式默认 Python/策略未切换。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离 native 链：CLI 文本/图片/文件/长文/冲突/dry-run/policy/上传边界 PASS；全量 386、回归 85/0/4。交 c2b-result，D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "config/env native latch：IM/core 观察 native 后注销/替换不落 Python；真实 Cordis dispose + core Python trap 验证。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "route 工具按真实 session/IM 绑定限定查询与修改；无证据 scope-required，跨聊天 scope-refused，拒绝不改账。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "共享 operation 合同（类型/枚举/数组/整数）、agenda.update 字段真实接通、真实 socket 413/400/后续成功、顶层异常 JSON 化。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新回归修前 7/12、修后 14/14；组合 83、全量 384、回归 83/0/4；全新隔离 native 自动链 PASS。交 followup-result，C2b/D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "router 插件显式 backend/root，注册 /api/lev-router 固定 API（真实宿主认证、白名单、64KB、无 argv/root）；policy/health 显式降级。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "IM native 缺服务/后端不匹配 -> unavailable 不回退 Python；lev-core lev_route 经 router service。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离所有路由状态根独立并显式 native：状态 backend=native、隔离根 5 文件无 .lock、无 route-ledger 日志、仓库 var/route mtime 不变；自动链 PASS 无手工 pump。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "C2a 8/8（修前 0/4）、组合 77/77、全量 378 node、回归 83/0/4。交 c2a-result，C2b/D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "notificationClaim 先算 coverage 再写通知账；receipt 单锁内先验证 pending 再追加 delivery；settle 顺序用回归锁定。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新回归修前 0/3、修后 3/3；拒绝时 notifications/deliveries/pending 字节不变，修复后同请求可领取，无 in_progress 残留。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "组合 69/69、全量 370 node、回归 81/0/4。交 c1-final-result，C2/D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "JSONL：写前严格检查，坏行/断尾拒绝追加且字节不变；通知/查询/历史坏账明确 corrupt，不再假成功/假健康。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新回归修前 0/7、修后 7/7；全量 367 node、回归 80/0/4。交 c1-followup-result，C2/D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "service 显式 backend 选择；native 下 run/typed 共用实现；默认仍 Python，失败不 fallback；正式账/profile 未动。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "修前 witness pythonCalls=1/error，修后 0/opened；native 与 Python 正常数据逐命令对拍；多进程第二 owner store-busy；坏账不覆盖、错误不毒队列。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "B 51 项保持；全量 360 node、回归 79/0/4；隔离真实宿主整链 PASS。交 c1-result，C2/D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "read-store：缺失首启空库；现存 JSON/schema 错=store-corrupt；JSONL 坏行/截断尾行有界重读后显式 degraded；policy 坏文件显式 policyState=corrupt。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "decide：日期分量往返校验；legacy scope 按 Python 覆盖；ID 索引改 Map；degraded/policyState 传给 IM。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "service.target 只读 deliveries+policy，无关账坏不阻塞、deliveries 坏明确传播。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新回归修前 3/11、修后 11/11；对拍 33 场景全同 Python；相关套件 43/43；全量 352 node、回归 77/0/4；隔离整链 PASS。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "交 b-followup-result，task verifying，未开始 C。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "新增 JS decide（与 Python 纯函数等价）+ 只读快照；service.run(['decide']) 与 service.decide 都走 JS，target 的 delivery 读改快照。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "Python 保留为未迁移入口与 oracle；写路径、agenda/pending/history/trace、lev-core route 工具仍 Python。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "固定时钟 24 场景逐字段对拍 24/24；修前 witness pythonCalls=2/decision error，修后 0/attach。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "缺失=空库、坏账本=store-corrupt（IM 降级 unavailable），读判定不改盘。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "345 node 全过；回归 76/0/4；隔离真实宿主整链 PASS。交 b-result，task router-native-20261024 verifying，C/D 未开始。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "人类批准上线尝试。B1–B4 已由 Codex 组合复核通过（整体 task 仍保留 verifying 的真实交互部分）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "通过 systemd-run 瞬态 service 重启 leviathan-web（5090），重新加载 repo 内 lev-* 插件；结果写 outbox/chat-evolution-activation-*.md。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "未恢复 timers/DSH schedule、未改路由策略、未发真实 IM；回滚：git 切回 12031c2 后重启 Web。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离真实宿主整链 PASS；341 node、回归 75/0/4。交 b4-result，task verifying。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "去重补齐不再提前写盘：新建/去重都构造最终行，统一 assertReferenceInvariants 通过后才写，拒绝不改 updatedAt。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "Codex witness 5/4 → 9/0；新增 3 项回归（拒绝无副作用、验证证据、混合/双向/角色保持）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全量 341 node、回归 74/0/4；B1/B2 未退步。交 b3-result，task verifying。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "根因：presetOf 调用了不存在的 projections.read 并解析 .val；真实 apply snapshot 调用 0 次，null 后旧 main 绑定提权。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "改为复用 sessionOf + sessionPreset（真实 snapshot(Session,['agentPreset'])，string|null），只认 main。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "actor 删除绑定/裸缓存/exec.preset 提权；非 main 一律受限 chat，绑定只给渠道。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "真实 apply 回归 4 项：snapshot 调用与 Session 形状、chat/main/null/throw、旧/退役绑定、陈旧缓存、exec.preset、参数自报。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离真实宿主整链新增 chat 回投被拒步骤 PASS；B1 回归保持；回归 73/0/4。交 b2-result，task verifying。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "handler 去两处早返回，冲突检查前移；过期 sending 转 unknown，显式 retry 才换代。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "receipt 只追加分片事实，撤掉按裸 id 跨 scope 改终态/覆盖来源的旧写者；flush 不再产生 ownerless claimed；digest 逐条 claim→deliver→settle。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "Codex 反例复跑：EXPIRED_LEASE_HTTP 409 unknown、RECEIPT_WRITER_BYPASS queued/0 sends、FLUSH_RECOVERY 保留事项；新 5 项 followup 回归全过；原 6+10 保持。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "隔离真实宿主整链 PASS；全量回归 72/0/4。交 followup-result，task verifying。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "按 Codex 五条修正：notifications 权威 intent/owner、deliveries 分片事实、sent 需全分片覆盖、完整 scope 键与结果修订、精确 lookup、发送前原子 claim。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "修前 9d7154c 跑同一 A–F 套件 0/6；修后 6/6（并发单飞、丢 ack 恢复、队列键保留、lookup sent、scope 冲突、分片部分成功不冒充/只补缺口）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "pump：键带 revision，发送前 lookup，queued/unknown 不重发；新结果事件新键（10 项套件）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "全量 329 node、14 bash 套件、回归 71/0/4；隔离真实宿主整链 PASS（未手工 pump、无残留）。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "交 `outbox/chat-evolution-20261024-coaching-b1-result.md`；task 保持 verifying，不做 B2–B4。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "按 guidance 小批次要求，只核对 B1 通知链，不改产品代码。真实 handler/engine 夹具在 var/b1（未入 git），7 个断言全部失败："
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "根因：键无单一所有者；notifications 队列状态被当发送事实（真事实在 deliveries 逐 chunk receipt）；去重是发送后记账而非发送前占权+恢复对账。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "方案：route-ledger 保留调用方键 + 冲突判定；handler sending 租约/单飞 + sent 落事实；engine 按 dedupeKey 跳过已发段；pump 只认 deliveries 的 sent；新增只读 delivery find。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "交 `outbox/chat-evolution-20261024-coaching-b1-proposal.md`（含状态语义表、最小改动、验收矩阵、未验边界）；task 仍 verifying。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "身份：可信 preset 查询优先，失效/退役绑定不再提供 main；真实回投被拒。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "通知：sent:false 不记已发送；失败也通知；payload 带 taskId/notificationId/session/kind/messageId；默认按任务约定通知；接收端按 notificationId 幂等、发送前对账。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "资料/验收：混合验收逐条件留状态（文字→needs-human-review）；add/state 校验最终证据不变量；../ 与绝对路径拒绝；关联失败不留半边；ref_by_task 不存在任务返回 not-found；notes 拒绝前不 mkdir。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "路由：last-reply 下关键词不抢占，显式引用仍优先。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "续接：21 条积压全部消化；锁续租且活 owner 不可抢；启动对账看执行者 pid；isolation verify 清理不再泄漏监听。"
+    },
+    {
+      "date": "2026-10-24",
+      "title": "二轮返工 6：证据真实性收口",
+      "text": "证据：repros / isolation / regression 三份 outbox 原件；323 node、13 bash、回归 69/0/4。"
     },
     {
       "date": "2026-10-24",
@@ -1786,6 +2156,71 @@
       "date": "2026-10-19",
       "title": "骨架、主脑、飞书与站点上线",
       "text": "**路由系统插件化第一步（12:5x CST，人类：「整个消息接收并路由系统应该做成 dsh 插件」）**：现状是接收在 lev-im 插件、路由却在 scripts/route-ledger.py，每条消息起 4~8 个 Python 子进程（单次 25~40ms），账本靠 .lock 跨进程互斥，插件、im-send.sh、lev-core 的 lev_route、控制台各走各的。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex：确认DS遗留B/C/D为路由插件内化，制定分批实施与验收计划；先让主脑实施B，再独立复核推进C/D，保持定时器停用。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex复核路由B：44项相关测试通过，独立发现schema/JSONL/policy损坏仍正常current；交有限补齐，C/D暂待验收，不恢复调度。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex：路由B补齐复核51项全过，工程收口；交主脑C1隔离原生写账，正式Python写者不切换，保留既有通知合同。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex复核C1：59相关测试全过，但确定复现锁回收双owner、JSONL断尾后返回sent却丢证据、未知命令关议题及history排序差异；已交有限补齐，未进入C2。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex：C1最后反例已修，69相关测试独立通过；坏日志claim拒绝不改通知账且可重试，C1收口。启动隔离C2a公开服务/真实宿主native接线；锁崩溃后仍需人工恢复，正式不切换。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex复核C2a：77组合与全新5097/5096真实native自动链通过；独立反例发现config-only注销回Python、工具跨scope、HTTP类型/更新吞字段/null与超限响应问题，交有限补齐，C2b/D未启。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex：C2a补齐独立83项与全新5097/5096显式native自动链通过，允许C2b CLI/媒体接线；正式模式/策略和定时器未动。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-24 Codex验C2b：85组合与实际12CLI通过；独立/tmp媒体probe确认digest发占位文却sent、空回执sent、unknown显式retry重复外发；正式只读dry-run证实脚本提前切新端点失效。交有限返工，优先恢复兼容，不重启。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-25 Codex：C2b最后对账反例已修（externalCalls=0），独立93项+12CLI及全新native CLI/媒体自动链通过；兼容脚本原字节恢复。启动D候选收尾，正式加载与旧路径退休后续明确窗口。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-25 Codex验D：独立399项与6真实tgz通过，但发现native候选lev_im_send/proactive回旧脚本、snapshot跨channel覆盖假完整/坏schema假clean、锁UI假绿；恢复和浏览器证据需补，交有限返工，不申请正式加载。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-25 Codex收口B/C/D工程候选：408全量/90自动回归/6tgz/独立packed真实链与Chrome passed；空锁与config-only注销最后反例已补。候选固定至var/releases/router-native-301efdb-core-0.3.2，已备未安装drop-in及具体切换步骤，正式旧服务/CLI/账/策略与调度未动，加载窗口待许可。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-25 Codex按人类明确确认正式加载native：固定包/HTTP CLI/Python写账守门启用，PID1604949、飞书connected，控制台Chrome通过，原route/tasks字节保留。初次profile别名替换致外部依赖循环，已锚定保留旧依赖并补回归。414 Node与90项分批规则验证通过；timers/schedule仍停。正式debug发送因自动审批未认定原授权涵盖写账而未执行，已发明确选择。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-25 Codex按人类“测一下”完成正式本地debug文本/图片/文件及去重验收：3条回执/交付完整，重复请求零新增；原业务账保留，仅新增3条debug交付/通知，native clean、飞书connected、原PID未变，timers仍停。未真实外发/调用模型；真人语义验收仍待。"
     }
   ]
 }
