@@ -1,7 +1,62 @@
 {
-  "generated": "2026-10-25T07:30:23.114586+00:00",
-  "source": "1d2d517",
+  "generated": "2026-11-02T15:24:24.808737+00:00",
+  "source": "8318366",
   "items": [
+    {
+      "date": "2026-11-02",
+      "title": "RSI 第二夜：资料池清账（--mark-read）",
+      "text": "队列第一条第二刀：plugins/lev-bus 0.3.0 → 0.3.1，新增 lib/ref-ack.js（resolveMarkTargets/planAck/renderAckBrief 纯函数）"
+    },
+    {
+      "date": "2026-11-02",
+      "title": "RSI 第二夜：资料池清账（--mark-read）",
+      "text": "验收口径：npm test 16 pass / 0 fail；生产 references.json dry-run 三条 top 全 evidence-required（18 条 unread 均无 evidenceRef，如实暴露而非造假）；"
+    },
+    {
+      "date": "2026-11-02",
+      "title": "RSI 第二夜：资料池清账（--mark-read）",
+      "text": "未做：digest 接进 lev-core tool（需重装 + 重启 web，已写 NEXT [H]）；模型生成真实摘要（留待 #2 判断）。"
+    },
+    {
+      "date": "2026-11-02",
+      "title": "RSI 第二夜：资料池清账（--mark-read）",
+      "text": "回滚：git revert 0276e50 或 `var/backups/rsi-markread-20261102T220226.tgz`。"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "router-codex-dialogue 候选实现（主脑本轮）",
+      "text": "Task 1–3：协议/probe、NativeStore dialogues 幂等存储、router 编排与六个共享工具；真实 26 项 dialogue 测试全过。"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "router-codex-dialogue 候选实现（主脑本轮）",
+      "text": "Task 4–7：Codex RPC/adapter fake、lev-bus executor/revision、重启 reconcile、artifact/HTTP 单元；真实 app-server、DSH turn、生图 **not_run**。"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "router-codex-dialogue 候选实现（主脑本轮）",
+      "text": "候选包 `var/dialogue-candidate/leviathan-lev-router-0.3.0.tgz`；未安装、未切 profile、未重启 Web、未发飞书。"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "router-codex-dialogue 候选实现（主脑本轮）",
+      "text": "报告 `outbox/router-codex-dialogue-acceptance.md，进度 outbox/router-codex-dialogue-progress.md`；留待 Codex 复核。"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "router-codex-dialogue 候选实现（主脑本轮）",
+      "text": "28 dialogue/52 task+dialogue/266 IM 离线通过；真实 Codex app-server、DSH runner 回投、生图、隔离宿主仍未跑，候选不可上线。"
+    },
+    {
+      "date": "2026-10-28",
+      "title": "router-codex-dialogue 候选实现（主脑本轮）",
+      "text": "commits a1361ba/f38e00e/79f6632/dd6e42b；报告 outbox/router-codex-dialogue-acceptance.md。"
+    },
+    {
+      "date": "2026-10-26",
+      "title": "router / im 0.3.0 正式上线",
+      "text": "**B站日报链接开始沉淀（2026-10-26，人类：「不能看了不记」）**：日报是 20:40 DSH schedule 跑的模型任务，发完就散在聊天里，资料池一条没进（池里 3 条都是 10-23 手工提的）。做法不依赖模型记忆：scripts/bili-archive.mjs 扫真实交付账本 「运行日志」，把 [标题](bilibili 链接) 幂等登记进 「运行日志」（unread/undecided，appliesTo=bili-daily，summary 取链接后的说明）。"
+    },
     {
       "date": "2026-10-25",
       "title": "路由 D 最终：发送服务注销补齐",
@@ -2221,6 +2276,111 @@
       "date": "2026-10-19",
       "title": "骨架、主脑、飞书与站点上线",
       "text": "2026-10-25 Codex按人类“测一下”完成正式本地debug文本/图片/文件及去重验收：3条回执/交付完整，重复请求零新增；原业务账保留，仅新增3条debug交付/通知，native clean、飞书connected、原PID未变，timers仍停。未真实外发/调用模型；真人语义验收仍待。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**审批/提问接进 IM（2026-10-25，人类反馈）**：人类说「需要审批/询问用户时没有转发到 IM」。查宿主：approval/request 与 user-questions/request 是 Agent 作用域的 waterfall，浏览器只在「它正在看的那个会话」里应答（ctx.sessions.scopeOf(owner) 为空就 next()），所以 IM 绑定会话的确认框要么悬着、要么失败关闭。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "2026-10-25 Codex修复候选打包的私有依赖来源：profile保留本地tgz与file依赖/版本限定传递override，记录SHA256；离线真实pnpm新增插件及搬迁后frozen重装、六包逐文件一致和既有打包回归通过。未动线上vendor/link、未重启。见notes/reviews/profile-local-artifact-install-20261025.md。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**B站日报投递失败（2026-10-25 20:45Z）**：scripts/im-send.sh --last 返回 HTTP 502 / channel-not-started（@leviathan/lev-im 0.2.2 已在 profile 里，但飞书 channel 未启动；结合 `notes/plans/router-d-switch-package-20261025.md`，应属 router/native 切换窗口的暂停状态，不能自行启停正式服务）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "阶段 1：routing.js 删掉「历史词把 current 降成 recall」；语义分类不再跨会话改目标（同会话议题仍可挂，已结束议题只留元数据）；engine.js 账本判 recall 时普通消息交 active，历史不直发；/history 与模型 lev_recall 保留。绑定加 bindingRevision（换目标才 +1）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "阶段 2：新增 lib/context-window.js——首次绑定 / 切换 / 距上条人类消息 >30 分钟才注入；contextId 幂等（失败记 pendingContextId，下条消息重试同一窗口）；正文转义、条数/字符上限、排除当前输入、助手行保留来源会话。机器资料只走 source.kind=runtime-context, form=recall；注入失败不拼人类 prompt。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "制品：lev-im 0.2.3；release 由 scripts/isolation-pack.sh 现打（var/releases/pack-20261025T132424Z），scripts/pack-verify.sh 五方一致 PASS（6 包 / 69 文件）。线上旧 release 被同一门禁判为「内容不可核对（vendor 软链）」，正是 14:32 旧包缺 interactions.js 的事故形态。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "scripts/test-im-system.sh 全绿（新增 test_active_session_policy.mjs、test_im_context_window.mjs，旧契约测试按新行为更新：recall 直发、prompt 降级文本、跨会话语义 attach）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "python3 scripts/regression-check.py：92 过 / 0 失败 / 4 人工 / 1 缺 fixture 跳过；命令类用例改为隔离全部 LEV_* 环境变量（此前 LEV_MEDIA_ROOT 泄漏造成 1 条假失败），缺 fixture 报 SKIP。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "STATE.md（1288→1120 units）与 AGENTS.md（926→888）体积回到上限内；NEXT 只留活跃项。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "阶段 3-5 未授权实施，计划见 `notes/plans/2026-10-25-unified-conversation.md`（§5.3 已按宿主 waterfall 机制修订）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "legacy-history-echo 标记需要先给 context-log 行补 deliveryId，列入 NEXT。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "真实飞书验证等人类发一句话。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "测试隔离：tests/test_rework_pump.sh 的 headless 兜底改为 DSH_BIN 桩 + 临时 DSH_HOME，并断言“桩日志有记录、无真实会话目录”；同一用例兜底 13 次全部打在桩上（此前会起真实模型请求，产生 5 个 MISSING_CREDENTIAL 子会话）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "重启接续：restart-handoff.sh（写 「运行日志」：session/goal/interrupt/note）→ resume-after-restart.sh（等 web 就绪 → 只给该会话投 source.kind=agent-message 接续说明 → pending→running→resumed/failed；认领锁、幂等、未就绪不消费、preset 冲突重试）；已进 apply 成功路径。18 条离线用例。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "attach 旁路：普通 attach（含显式引用）不再把回合交给议题会话，只带议题事实作背景；trace 记 attachPinnedSession/attachSuppressed。显式换目标仍走 /session 与角色命令。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "部署事务归 core：lev-core 0.4.0 新增 release/（service/tool/worker + 四个脚本实现）与 lev_release status|verify|apply、认证 API；scripts/ 四个脚本降为兼容入口；不再用墙钟判旧代码，改运行身份内容摘要。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "IM 全绿；regression 94 过 0 失败（4 人工、1 缺 fixture 跳过）；core release 测试 7/4/1 通过。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "线上：core-release-20261025T145704Z（core 0.4.0 / lev-im 0.2.4），PID 1871466（22:58:28 起）；运行身份 digest dcf6248… 与仓库 plugins/lev-core 一致；lev_release verify PASS（6 包 / 78 文件 / 0 警告）；飞书 status online=true。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "**接续实测成功**：22:58 部署时 handoff= pending，apply 成功后调度接续；本会话收到机器来源接续说明并继续（「运行日志」 14:58:34 start）。这是第一次“重启后自动回来”。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "真实飞书验收要人类发一句话（NEXT 标 [H]）。"
+    },
+    {
+      "date": "2026-10-19",
+      "title": "骨架、主脑、飞书与站点上线",
+      "text": "阶段 3–5（双端仲裁、会话委托、legacy 回显标记）仍未授权实施。"
     }
   ]
 }
