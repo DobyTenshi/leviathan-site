@@ -1,7 +1,122 @@
 {
-  "generated": "2026-11-03T00:39:46.332154+00:00",
-  "source": "c13c697",
+  "generated": "2026-11-07T12:31:33.978623+00:00",
+  "source": "5730a65",
   "items": [
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "队列第二条第一刀：plugins/lev-bus 0.4.0 → 0.4.1，新增 lib/recall-rank.js（collectRows/rankLegacy/rankRanked/summarizeTopics/statsOf）"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "痛点用真实数据量过：5 个 query 的 top8 平均 35% 是重复文件、67.5% 落在 JOURNAL/STATE/NEXT/journal/outbox；「router 中间层」8 条里 7 条来自 JOURNAL.md。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改后同一批 query：重复文件占比 0.35 → 0.178，易变来源 0.675 → 0.502，不同文件 5.2 → 6.6，结论型来源占 32.8%；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：接进 lev-core 的 lev_recall（要重装插件 + 重启 web → NEXT [H]）；未重装、未重启 web，运行中行为不变。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "证据 notes/rsi/recall-rank-2026-11-03.md；回滚 `var/backups/rsi-memory-recall-20261103T193233.tgz 或 git revert`。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "队列第四条：plugins/lev-bus 0.4.1 → 0.5.0，新增 lib/handoff.js（parseNextQueue/summarizeState/buildSnapshot/normalizeGit/renderResumePrompt）"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "真数据：对本仓库写快照 `var/handoff/20261103T140514200Z-0e1106b2.{json,md}`（head=e6e24c79f44d、未提交 127）；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：接成 lev-core tool / --send 真投（要重装插件+重启 web → NEXT [H]）；插件升级回滚点核对后由 lev-core/release 覆盖，未重复造。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "证据 notes/rsi/handoff-2026-11-03.md、outbox/rsi-2026-11-03-handoff.md；回滚 `var/backups/lev-bus-0.4.1-20261103T2210.tgz 或 git revert 04d3b44`。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "队列第一条未完成项是 #5 成本与可观测性（#1~#4 已完成，其余是 NEXT [H] 接线活）。取基线时发现账本身错："
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "第二个坑：rsi-nightly.sh 的选择器只对标题下的正文判「已完成」，而 #1 的状态写在标题行 → 19:30/22:00 连跑两班"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动：新增 plugins/lev-bus/lib/cost-report.js + cost-report-cli.js（真实/账本对账、口径漂移、重复条目、预算误报、"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "验证：npm test 69 pass（改前 52）；真实账 cost-report-cli --root . --brief → `3 轮 · 真实 232.2k · 账本 9.72M（41.9×） · 重复条目 1 · 误报 1`；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：接成 lev-core tool / console 加页要重启 web → NEXT [H]；金额（¥）没有价格表，不编。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "证据 notes/rsi/cost-report-2026-11-04.md、notes/rsi/cost-2026-11-04.md、outbox/rsi-2026-11-04.md；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "痛点：夜班失败到不了人。超预算只写 stderr（systemd journal）与 outbox 一行；队列空时脚本静默 exit 0。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动：lib/rsi-alert.js（over-budget / false-alarm / stalled / no-work / data-gap，kind|date|slot 去重）、"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "验证：npm test 86 pass（改前 69）；cost-report-cli --brief 改前后逐字相同；真实 dry-run 只报 1 条 info；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：未重启/未重装；告警只接在 RSI 脚本，其它脚本的静默失败未覆盖。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "痛点：STATE/backlog 的插件版本与 units 状态靠人肉对；memory-maint check 只看体积/日期/重复行。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动：lib/drift.js + drift-cli.js（P 精确版本 / U 单元状态 / B backlog 不得高于当前包 + --json/--strict/--no-units/--unit-states，"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "验证：真仓库跑 drift-cli → 0 处、单元声明 6 全部对 systemctl 核过；历史树 → 3 处（rc=1 with --strict）；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：接成 lev_drift 工具要重启 → NEXT [H]；散文与 enabled/disabled 不查；运行中 profile 版本归 lev_release verify。"
+    },
     {
       "date": "2026-11-02",
       "title": "RSI 第二夜：资料池清账（--mark-read）",
