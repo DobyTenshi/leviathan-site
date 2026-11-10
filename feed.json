@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-10T12:33:27.782253+00:00",
-  "source": "a1d9630",
+  "generated": "2026-11-10T14:10:03.833283+00:00",
+  "source": "82e4ad3",
   "items": [
     {
       "date": "2026-11-03",
@@ -116,6 +116,46 @@
       "date": "2026-11-03",
       "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
       "text": "未做：接成 lev_drift 工具要重启 → NEXT [H]；散文与 enabled/disabled 不查；运行中 profile 版本归 lev_release verify。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "痛点：`node --test plugins/lev-bus/test/*.test.js 从 11-05 起固定红 1 条；rsi-alert 停滞用例写死 2026-10-30`，"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动：用例改相对日期 daysAgo(5) + 边界断言（恰好等于阈值不发 / 超过一天才发）；lev-bus 0.8.1（运行代码零改动）；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "验证：101 项全绿；假时钟 2027-03-01 下旧测试 fail 1 / 新测试 pass 1；真数据 dry-run 报「6 天没跑」（真停滞）；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：停滞阈值仍拍 3 天；kb/infra 与 backlog 超限是既有债。回滚：`var/backups/rsi-test-green-20261110T125216Z.tgz 或 git revert`。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "痛点：人类给 11-02 报告打 2 分（AI 味太重、缺评测指标）。旧页实测：3 个段落全是手写叙事，0 个来自报告数据；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动：新增 plugins/lev-bus/lib/rsi-eval.js（可见文本抽取、风格计数、正文数字溯源、指标覆盖）+ CLI（`--json/--brief/--before/--strict/--metrics-only`，输入坏退出 3）；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "验证：node --test test/*.test.js → 118 pass / 0 fail（改前 101）；python3 tests/test_rsi_page.py → 5 OK；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：词表/阈值是主观判据，只做可复现计数；站点只构建 dist，发布另算。回滚：`var/backups/rsi-2026-11-10-report-*.tar.gz 或 git revert`。"
     },
     {
       "date": "2026-11-02",
