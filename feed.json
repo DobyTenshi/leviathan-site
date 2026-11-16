@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-13T12:33:27.842251+00:00",
-  "source": "ff454a0",
+  "generated": "2026-11-16T12:32:47.459460+00:00",
+  "source": "29daf6c",
   "items": [
     {
       "date": "2026-11-03",
@@ -211,6 +211,36 @@
       "date": "2026-11-03",
       "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
       "text": "验证：真实宿主同一输入（死 sid）改前 rc=1/sid 未退役 → 改后 rc=0、留档 .retired.20261113T113715Z、"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "根因：on_term() 用 jq -cn 从零重建 meta，把 task/started/pid/taskId 全抹掉 ——「任务「」」就是这么来的。"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动：on_term 改合并（+signal/runLogBytes）；running meta 补 taskId；中断日志带 bytes=/task_chars=；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "验证：真 systemd 单元 + 真 TERM，改前 meta 5 字段（无 task）、改后 11 字段；待收口 1→0、已结案 2→3；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "现状（改前实测）：生成侧只有 1 条 DSH schedule（20:40），绑 im:feishu_… 会话、preset=cordis（audit exit 1）；"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "改动（新增，未安装）：scripts/bili-daily-cli.mjs（提示词/解析/去重/最近投递判重/入口对比）、"
+    },
+    {
+      "date": "2026-11-03",
+      "title": "RSI 第三夜：召回重排（lev-bus 0.4.1）",
+      "text": "未做：没装 timer、没停 DSH、没重启 web、没改人格/规则、没碰 ~/.dsh。待人类在 A/B/C 里选。"
     },
     {
       "date": "2026-11-02",
